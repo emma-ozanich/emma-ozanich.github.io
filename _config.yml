@@ -2,3 +2,6 @@ theme: jekyll-theme-minimal
 title: Emma Ozanich's Homepage
 description: My sandbox for cool data projects
 future: true
+
+baseurl: ''
+url: 'http://localhost:4000'
