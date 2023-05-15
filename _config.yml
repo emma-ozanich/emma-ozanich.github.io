@@ -6,6 +6,5 @@ future: true
 # Build Settings
 sass:
   sass_dir: _sass
-include: ['MYPROJECT']
 kramdown:
   input: GFM
