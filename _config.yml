@@ -2,3 +2,10 @@ theme: jekyll-theme-minimal
 title: Emma Ozanich's Homepage
 description: My sandbox for cool data projects
 future: true
+
+# Build Settings
+sass:
+  sass_dir: _sass
+include: ['MYPROJECT']
+kramdown:
+  input: GFM
