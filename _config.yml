@@ -27,9 +27,9 @@ index_pages:
 
 # Build settings
 markdown: kramdown
-theme: jekyll-theme-tactile
-#plugins:
-#  - jekyll-paginate-v2
+theme: phantom
+plugins:
+  - jekyll-paginate-v2
 
 ############################################################
 # Site configuration for the Jekyll 3 Pagination Gem
@@ -37,7 +37,7 @@ theme: jekyll-theme-tactile
 pagination:
   
   # Site-wide kill switch, disabled here it doesn't run at all 
-  enabled: false # true
+  enabled: true
 
   # Set to 'true' to enable pagination debugging. This can be enabled in the site config or only for individual pagination pages
   debug: false
@@ -98,7 +98,7 @@ admin_name: 'Emma Ozanich'
 enable_contact: false
 
 #### Phantom Navigation menu
-#enable_nav: true
-#nav_item:
-#  - { url: '/', text: 'Home' }
-#  - { url: '/about', text: 'About' }
+enable_nav: true
+nav_item:
+  - { url: '/', text: 'Home' }
+  - { url: '/about', text: 'About' }
