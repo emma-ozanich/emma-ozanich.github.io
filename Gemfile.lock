@@ -69,10 +69,10 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 2.0)
-  jekyll-paginate-v2 (~> 1.1.0)
+  jekyll-paginate-v2 (~> 2.0)
   kramdown-parser-gfm
   phantom!
- # rake (~> 12.3)
+  rake (~> 12.3)
 
 BUNDLED WITH
    2.4.12
