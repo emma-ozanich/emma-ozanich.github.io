@@ -72,7 +72,7 @@ DEPENDENCIES
   jekyll-paginate-v2 (~> 1.1.0)
   kramdown-parser-gfm
   phantom!
-  rake (~> 12.3)
+ # rake (~> 12.3)
 
 BUNDLED WITH
    2.4.12
