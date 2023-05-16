@@ -23,7 +23,7 @@ github_username: 'emma-ozanich'
 
 # Build settings
 markdown: kramdown
-theme: jekyll-theme-minimal
+theme: jekyll-theme-tactile
 plugins:
   - jekyll-paginate-v2
 
