@@ -5,3 +5,4 @@ gemspec
 
 gem "kramdown-parser-gfm"
 gem "jekyll-paginate"
+gem "jekyll-include-cache"
