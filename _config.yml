@@ -21,6 +21,10 @@ email: 'emmareevesozanich@gmail.com'
 # twitter_username: 'dr.eoz'
 github_username: 'emma-ozanich'
 
+show_downloads: true
+google_analytics:
+index_pages:
+
 # Build settings
 markdown: kramdown
 theme: jekyll-theme-tactile
