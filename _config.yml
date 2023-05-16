@@ -27,9 +27,11 @@ index_pages:
 
 # Build settings
 markdown: kramdown
-theme: jekyll-theme-tactile
+#theme: jekyll-theme-tactile
+remote_theme: jamigibbs/phantom
 plugins:
-  - jekyll-paginate
+  - jekyll-paginate-v2
+  - jekyll-include-cache
 
 ############################################################
 # Site configuration for the Jekyll 3 Pagination Gem
