@@ -30,7 +30,7 @@ markdown: kramdown
 #theme: jekyll-theme-tactile
 remote_theme: jamigibbs/phantom
 plugins:
-  - jekyll-paginate-v2
+  - jekyll-paginate
   - jekyll-include-cache
 
 ############################################################
