@@ -12,7 +12,7 @@ on:
       - README.md
 
 jobs:
-  build-deploy:
+  github-pages:
     name: Build and deploy
 
     runs-on: ubuntu-latest
