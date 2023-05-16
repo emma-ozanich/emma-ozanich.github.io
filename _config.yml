@@ -27,7 +27,7 @@ index_pages:
 
 # Build settings
 markdown: kramdown
-theme: phantom
+theme: jekyll-theme-tactile
 plugins:
   - jekyll-paginate-v2
 
