@@ -59,7 +59,7 @@ plugins:
 
 author:
   name   : "Emma Ozanich"
-  avatar : "/assets/images/emma-ozanich.jpg"
+  avatar : "Emma-Ozanich.jpg"
   bio    : "Physical scientist and engineer. I use wave models and real-world data to localize sounds!"
   links:
     - label: "GitHub"
