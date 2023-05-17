@@ -6,9 +6,6 @@ header:
   teaser: Figure14.png
 ---
 
-Check out this page soon for a summary of my final research paper using deep embedded clustering to categorize coral reef sounds! 
-
-from
 E. Ozanich, A. Thode, P. Gerstoft, L. A. Freeman, and S. Freeman, “Deep embedded clustering of coral reef bioacoustics,”
 _*J. Acoust. Soc. Am. 149*_ (2021): 2587–2601
 
