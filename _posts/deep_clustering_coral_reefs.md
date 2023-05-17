@@ -1,5 +1,5 @@
 ---
-title: "Deep clustering of fish calls and whale song in coral reef ambient noise"
+title: "Deep clustering in coral reef noise"
 categories:
   - ocean acoustics
 header:
