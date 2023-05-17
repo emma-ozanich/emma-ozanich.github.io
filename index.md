@@ -6,7 +6,7 @@ layout: home
 author_profile: true
 ---
 
-# Hello, Welcome to my page, where I share some of my projects in acoustics and data science!  
+Hello, Welcome to my page! Here I share some of my projects in acoustics and data science!  
 
 
 
