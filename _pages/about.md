@@ -10,7 +10,7 @@ title: "Resume"
   *B.S. Physics -- Hamline University, St. Paul, Minnesota*     &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;June 2014
   
 ### Experience
-  -**JASCO Applied Sciences** -- *Project Scientist*, Remote (Arvada, CO)    &ensp;&ensp;&ensp;&ensp; March 2022 - Present
+  - **JASCO Applied Sciences** -- *Project Scientist*, Remote (Arvada, CO)    &ensp;&ensp;&ensp;&ensp; March 2022 - Present
       -  Numerically model the noise impact of large ocean construction
     projects on marine fauna with parabolic equation (PE), ray-based
     models for far-field, and finite-element stress waves for near-field
@@ -22,7 +22,7 @@ title: "Resume"
       -  Build and improve algorithmic models for simulated acoustic data
     analysis in IDL
 
-  -**Woods Hole Oceanographic Institution** -- *Postdoctoral Investigator*, Woods Hole, MA     January 2021 - February 2022
+  - **Woods Hole Oceanographic Institution** -- *Postdoctoral Investigator*, Woods Hole, MA     January 2021 - February 2022
   -  Investigated ocean acoustic propagation in 3D-varying underwater
     index of refraction due to Gulf-stream induced temperature gradient,
     with PE modeling in MATLAB
