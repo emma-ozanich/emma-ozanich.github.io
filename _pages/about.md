@@ -1,8 +1,8 @@
 ---
 permalink: /about/
 title: "Resume"
-<link rel="stylesheet" href="font_stylesheet.css">
 ---
+<link rel="stylesheet" href="font_stylesheet.css">
 
 
 ### Education
