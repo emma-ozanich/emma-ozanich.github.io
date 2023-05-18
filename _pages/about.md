@@ -10,7 +10,7 @@ title: "Resume"
   <body>
 
 ### Education
-  *Ph.D. Oceanography -- Scripps Institution of Oceanography, La Jolla, California*     &nbsp;&nbsp;&nbsp;December 2020    
+  *Ph.D. Oceanography -- Scripps Institution of Oceanography, La Jolla, California*     <span style="margin-right: 20px;">;December 2020   </span> 
   *M.S. Oceanography -- Scripps Institution of Oceanography, La Jolla, California*  &nbsp;&nbsp;&nbsp;  October 2017  
   *B.S. Physics -- Hamline University, St. Paul, Minnesota*  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; June 2014
   
