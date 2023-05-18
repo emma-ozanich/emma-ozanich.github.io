@@ -5,16 +5,13 @@ title: "Resume"
 
 
 ### Education
-<span style="font-size: 20px;">
   *Ph.D. Oceanography -- Scripps Institution of Oceanography, La Jolla, California*     &ensp;&ensp;&ensp;&ensp;December 2020    
   *M.S. Oceanography -- Scripps Institution of Oceanography, La Jolla, California*     &ensp;&ensp;&ensp;&ensp;&ensp;October 2017    
   *B.S. Physics -- Hamline University, St. Paul, Minnesota*     &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;June 2014
- </span>
   
 ### Experience
   **JASCO Applied Sciences** -
   -*Project Scientist*, Remote (Arvada, CO)     March 2022 - Present
-  <span style="font-size: 20px;">
       -  Numerically model the noise impact of large ocean construction
     projects on marine fauna with parabolic equation (PE), ray-based
     models for far-field, and finite-element stress waves for near-field
@@ -25,7 +22,6 @@ title: "Resume"
     fill data gaps and meet deadlines
       -  Build and improve algorithmic models for simulated acoustic data
     analysis in IDL
- </span>
 
   **Woods Hole Oceanographic Institution** -- *Postdoctoral Investigator*, Woods Hole, MA     January 2021 - February 2022
   -  Investigated ocean acoustic propagation in 3D-varying underwater
