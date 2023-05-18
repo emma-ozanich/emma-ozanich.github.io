@@ -3,7 +3,6 @@ permalink: /about/
 title: "Resume"
 ---
 
-<font size="2">
 
 ### Education
   *Ph.D. Oceanography -- Scripps Institution of Oceanography, La Jolla, California*     December 2020
@@ -82,5 +81,3 @@ for direction-of-arrival estimation,\" *J. Acoust. Soc. Am.* **147**
 M. J. Bianco, P. Gerstoft, J. Traer, **E. Ozanich**, M. Roch, S. Gannot,
 and C.-A. Deledalle, "Machine learning in acoustics: Theory and
 applications,\" *J. Acoust. Soc. Am.* **146** (2019): 3590--3628.\
-
-</font>
