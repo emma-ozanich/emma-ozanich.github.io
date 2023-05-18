@@ -1,3 +1,8 @@
+---
+permalink: /about/
+title: "Resume"
+---
+
 ::: center
 **Emma R. Ozanich**\
 
