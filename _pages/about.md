@@ -2,51 +2,19 @@
 permalink: /about/
 title: "Resume"
 ---
-=======
----
-permalink: /about/
-title: "Resume"
----
 
->>>>>>> 48e9caacbe400072293b5e4a69450827ca6994e6
-::: center
+<p align=center>
 **Emma R. Ozanich**\
-
 emmareevesozanich@gmail.com :: 218-839-5123 :: github.com/emma-ozanich
-:::
+</p>
 
-::: shaded
-:::
-
-\
-
-  ----------------------------------------------------------------------------------- ---------------
+## Education
   *Ph.D. Oceanography -- Scripps Institution of Oceanography, La Jolla, California*     December 2020
-                                                                                      
-  ----------------------------------------------------------------------------------- ---------------
-
-  ---------------------------------------------------------------------------------- --------------
   *M.S. Oceanography -- Scripps Institution of Oceanography, La Jolla, California*     October 2017
-                                                                                     
-  ---------------------------------------------------------------------------------- --------------
-
-  ----------------------------------------------------------- -----------
   *B.S. Physics -- Hamline University, St. Paul, Minnesota*     June 2014
-                                                              
-  ----------------------------------------------------------- -----------
-
-::: shaded
-:::
-
-\
-
-  ------------------------------------------------------------------------ ----------------------
+  
+## Experience
   **JASCO Applied Sciences** -- *Project Scientist*, Remote (Arvada, CO)     March 2022 - Present
-                                                                           
-  ------------------------------------------------------------------------ ----------------------
-
-\
-
 -   Numerically model the noise impact of large ocean construction
     projects on marine fauna with parabolic equation (PE), ray-based
     models for far-field, and finite-element stress waves for near-field
@@ -61,15 +29,8 @@ emmareevesozanich@gmail.com :: 218-839-5123 :: github.com/emma-ozanich
 -   Build and improve algorithmic models for simulated acoustic data
     analysis in IDL
 
-\
 
-  ----------------------------------------------------------------------------------------- ------------------------------
   **Woods Hole Oceanographic Institution** -- *Postdoctoral Investigator*, Woods Hole, MA     January 2021 - February 2022
-                                                                                            
-  ----------------------------------------------------------------------------------------- ------------------------------
-
-\
-
 -   Investigated ocean acoustic propagation in 3D-varying underwater
     index of refraction due to Gulf-stream induced temperature gradient,
     with PE modeling in MATLAB
@@ -83,19 +44,9 @@ emmareevesozanich@gmail.com :: 218-839-5123 :: github.com/emma-ozanich
 
 -   At-sea data collection operations, including shipboard sonar
     operation and time-syncing acoustic clocks to DGPS reference
+    
 
-\
-
-<<<<<<< Updated upstream
-Cupidatat ea do et in excepteur in. Ad nostrud ut est esse eu duis ea sunt eiusmod. Aliquip tempor veniam sint elit fugiat. Velit incididunt laboris amet incididunt labore dolore irure velit excepteur commodo deserunt laborum. Consectetur eu fugiat veniam veniam Lorem labore magna eiusmod. Ea occaecat reprehenderit pariatur consectetur minim labore ut aliquip.
-=======
-  ---------------------------------------------------------------------------------------- ---------------------------
   **University of California San Diego** -- *Graduate Student Researcher*, San Diego, CA     June 2014 - December 2020
-                                                                                           
-  ---------------------------------------------------------------------------------------- ---------------------------
-
-\
-
 -   Conventional and Bayesian signal processing for underwater acoustic
     data analysis in MATLAB
 
@@ -110,61 +61,28 @@ Cupidatat ea do et in excepteur in. Ad nostrud ut est esse eu duis ea sunt eiusm
 -   Run and manage matrix computation and neural network training with
     multithreaded algorithms on CPU and GPU local server clusters
 
-\
-
-  ------------------------------------------------------------------------------------------------------ -------------------
   *Graduate Teaching Assistant --* Electr. Comp. Eng. 228: Machine learning for physical applications      Spring 2019, 2020
                                                                                                          
-  ------------------------------------------------------------------------------------------------------ -------------------
-
-\
-
 -   Designed demo for importing, analyzing, and visualizing NOAA
     datasets with Google BigQuery, Jupyter, and Pandas
 
-\
 
-  ----------------------------------------------------------------------- -----------------------
   **Naval Underwater Warfare Center** -- *Pathways Intern*, Newport, RI     June - September 2019
-                                                                          
-  ----------------------------------------------------------------------- -----------------------
-
 -   Conducted sensitive research for underwater detection on-site at
     NUWC NAVSEA campus
 
 -   Developed algorithm to automatically detect sounds of interest using
     time--frequency (Fourier) methods with unsupervised machine learning
-
-::: shaded
-:::
-
-\
-
-  ------------------------------------------- ---------------
+    
+  ## Certificates
   Micro-MBA *UCSD Rady School of Business*      *Summer 2020*
-  ------------------------------------------- ---------------
-
-\
-
-  ----------------------------------------------------- ---------------
   HPC User Training *San Diego Supercomputer Center*      *Spring 2020*
-  ----------------------------------------------------- ---------------
 
-\
-
-::: shaded
-:::
-
-\
+## Software
 MATLAB, Python and Jupyter, IDL, LaTex, Microsoft Office, linux/unix,
 ArcGIS Arcmap, SQLite, C++, Github (Desktop)\
 
-::: shaded
-:::
-
-\
-
-<<<<<<< HEAD
+## Publications
 B. J. DeCourcy, Y.-T. Lin, W. G. Zhang, **E. R. Ozanich**, N. Kukshtel,
 M. Siderius, G. Gawarkiewicz, J. Forsyth, "Real-time joint acoustics and
 circulation modeling in the 2021 New England Shelf Break Acoustics
