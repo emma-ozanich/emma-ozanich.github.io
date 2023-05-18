@@ -13,49 +13,49 @@ title: "Resume"
   
 ### Experience
   **JASCO Applied Sciences** -- *Project Scientist*, Remote (Arvada, CO)     March 2022 - Present
-    -   Numerically model the noise impact of large ocean construction
+    *   Numerically model the noise impact of large ocean construction
     projects on marine fauna with parabolic equation (PE), ray-based
     models for far-field, and finite-element stress waves for near-field
     acoustics using Harris Geospatial IDL
-    -   Develop geographic maps of modeled shapefiles, bathymetry in ArcGIS
+    *   Develop geographic maps of modeled shapefiles, bathymetry in ArcGIS
     ArcMaps and Arcpy
-    -   Communicate and meet with clients and international colleagues to
+    *   Communicate and meet with clients and international colleagues to
     fill data gaps and meet deadlines
-    -   Build and improve algorithmic models for simulated acoustic data
+    *   Build and improve algorithmic models for simulated acoustic data
     analysis in IDL
 
   **Woods Hole Oceanographic Institution** -- *Postdoctoral Investigator*, Woods Hole, MA     January 2021 - February 2022
-    -   Investigated ocean acoustic propagation in 3D-varying underwater
+    *   Investigated ocean acoustic propagation in 3D-varying underwater
     index of refraction due to Gulf-stream induced temperature gradient,
     with PE modeling in MATLAB
-    -   Implement signal and array processing techniques to improve
+    *   Implement signal and array processing techniques to improve
     experiment signal quality, including time-delay offset correction
     via ambient noise cross-correlation and 3D beamforming
-    -   Computed channel impulse response through deconvolution of measured
+    *   Computed channel impulse response through deconvolution of measured
     and time-gated reference signal in MATLAB
-    -   At-sea data collection operations, including shipboard sonar
+    *  At-sea data collection operations, including shipboard sonar
     operation and time-syncing acoustic clocks to DGPS reference
 
   **University of California San Diego** -- *Graduate Student Researcher*, San Diego, CA     June 2014 - December 2020
-    -   Conventional and Bayesian signal processing for underwater acoustic
+    *   Conventional and Bayesian signal processing for underwater acoustic
     data analysis in MATLAB
-    -   Wrote an unsupervised image-based clustering pipeline to group
+    *   Wrote an unsupervised image-based clustering pipeline to group
     unlabeled coral reef acoustic signals by spectrogram representations
     using deep clustering and Gaussian mixture models in Python
     Scikit-Learn
-    -   Developed a deep neural network beamformer in Python to estimate
+    *   Developed a deep neural network beamformer in Python to estimate
     multiple source direction-of-arrivals
-    -   Run and manage matrix computation and neural network training with
+    *   Run and manage matrix computation and neural network training with
     multithreaded algorithms on CPU and GPU local server clusters
 
   *Graduate Teaching Assistant --* Electr. Comp. Eng. 228: Machine learning for physical applications      Spring 2019, 2020
-     -  Designed demo for importing, analyzing, and visualizing NOAA
+     *  Designed demo for importing, analyzing, and visualizing NOAA
     datasets with Google BigQuery, Jupyter, and Pandas
  
   **Naval Underwater Warfare Center** -- *Pathways Intern*, Newport, RI     June - September 2019
-    -   Conducted sensitive research for underwater detection on-site at
+     *   Conducted sensitive research for underwater detection on-site at
     NUWC NAVSEA campus
-    -   Developed algorithm to automatically detect sounds of interest using
+     *   Developed algorithm to automatically detect sounds of interest using
     time--frequency (Fourier) methods with unsupervised machine learning
     
 ## Certificates
