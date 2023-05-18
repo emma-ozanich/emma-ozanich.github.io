@@ -1,15 +1,184 @@
+<<<<<<< HEAD
+=======
 ---
 permalink: /about/
 title: "Resume"
 ---
 
+>>>>>>> 48e9caacbe400072293b5e4a69450827ca6994e6
 ::: center
 **Emma R. Ozanich**\
-=======
-title: "About"
----
->>>>>>> parent of fe540cd (add resume as about page)
 
-Tempor velit sint sunt ipsum tempor enim ad qui ullamco. Est dolore anim ad velit duis dolore minim sunt aliquip amet commodo labore. Ut eu pariatur aute ea aute excepteur laborum. Esse ea esse excepteur minim mollit qui cillum excepteur ex dolore magna. Labore deserunt fugiat incididunt incididunt sint ea. Consequat dolore aute laboris quis proident quis non et est consectetur ex eiusmod sit culpa.
+emmareevesozanich@gmail.com :: 218-839-5123 :: github.com/emma-ozanich
+:::
 
+::: shaded
+:::
+
+\
+
+  ----------------------------------------------------------------------------------- ---------------
+  *Ph.D. Oceanography -- Scripps Institution of Oceanography, La Jolla, California*     December 2020
+                                                                                      
+  ----------------------------------------------------------------------------------- ---------------
+
+  ---------------------------------------------------------------------------------- --------------
+  *M.S. Oceanography -- Scripps Institution of Oceanography, La Jolla, California*     October 2017
+                                                                                     
+  ---------------------------------------------------------------------------------- --------------
+
+  ----------------------------------------------------------- -----------
+  *B.S. Physics -- Hamline University, St. Paul, Minnesota*     June 2014
+                                                              
+  ----------------------------------------------------------- -----------
+
+::: shaded
+:::
+
+\
+
+  ------------------------------------------------------------------------ ----------------------
+  **JASCO Applied Sciences** -- *Project Scientist*, Remote (Arvada, CO)     March 2022 - Present
+                                                                           
+  ------------------------------------------------------------------------ ----------------------
+
+\
+
+-   Numerically model the noise impact of large ocean construction
+    projects on marine fauna with parabolic equation (PE), ray-based
+    models for far-field, and finite-element stress waves for near-field
+    acoustics using Harris Geospatial IDL
+
+-   Develop geographic maps of modeled shapefiles, bathymetry in ArcGIS
+    ArcMaps and Arcpy
+
+-   Communicate and meet with clients and international colleagues to
+    fill data gaps and meet deadlines
+
+-   Build and improve algorithmic models for simulated acoustic data
+    analysis in IDL
+
+\
+
+  ----------------------------------------------------------------------------------------- ------------------------------
+  **Woods Hole Oceanographic Institution** -- *Postdoctoral Investigator*, Woods Hole, MA     January 2021 - February 2022
+                                                                                            
+  ----------------------------------------------------------------------------------------- ------------------------------
+
+\
+
+-   Investigated ocean acoustic propagation in 3D-varying underwater
+    index of refraction due to Gulf-stream induced temperature gradient,
+    with PE modeling in MATLAB
+
+-   Implement signal and array processing techniques to improve
+    experiment signal quality, including time-delay offset correction
+    via ambient noise cross-correlation and 3D beamforming
+
+-   Computed channel impulse response through deconvolution of measured
+    and time-gated reference signal in MATLAB
+
+-   At-sea data collection operations, including shipboard sonar
+    operation and time-syncing acoustic clocks to DGPS reference
+
+\
+
+<<<<<<< Updated upstream
 Cupidatat ea do et in excepteur in. Ad nostrud ut est esse eu duis ea sunt eiusmod. Aliquip tempor veniam sint elit fugiat. Velit incididunt laboris amet incididunt labore dolore irure velit excepteur commodo deserunt laborum. Consectetur eu fugiat veniam veniam Lorem labore magna eiusmod. Ea occaecat reprehenderit pariatur consectetur minim labore ut aliquip.
+=======
+  ---------------------------------------------------------------------------------------- ---------------------------
+  **University of California San Diego** -- *Graduate Student Researcher*, San Diego, CA     June 2014 - December 2020
+                                                                                           
+  ---------------------------------------------------------------------------------------- ---------------------------
+
+\
+
+-   Conventional and Bayesian signal processing for underwater acoustic
+    data analysis in MATLAB
+
+-   Wrote an unsupervised image-based clustering pipeline to group
+    unlabeled coral reef acoustic signals by spectrogram representations
+    using deep clustering and Gaussian mixture models in Python
+    Scikit-Learn
+
+-   Developed a deep neural network beamformer in Python to estimate
+    multiple source direction-of-arrivals
+
+-   Run and manage matrix computation and neural network training with
+    multithreaded algorithms on CPU and GPU local server clusters
+
+\
+
+  ------------------------------------------------------------------------------------------------------ -------------------
+  *Graduate Teaching Assistant --* Electr. Comp. Eng. 228: Machine learning for physical applications      Spring 2019, 2020
+                                                                                                         
+  ------------------------------------------------------------------------------------------------------ -------------------
+
+\
+
+-   Designed demo for importing, analyzing, and visualizing NOAA
+    datasets with Google BigQuery, Jupyter, and Pandas
+
+\
+
+  ----------------------------------------------------------------------- -----------------------
+  **Naval Underwater Warfare Center** -- *Pathways Intern*, Newport, RI     June - September 2019
+                                                                          
+  ----------------------------------------------------------------------- -----------------------
+
+-   Conducted sensitive research for underwater detection on-site at
+    NUWC NAVSEA campus
+
+-   Developed algorithm to automatically detect sounds of interest using
+    time--frequency (Fourier) methods with unsupervised machine learning
+
+::: shaded
+:::
+
+\
+
+  ------------------------------------------- ---------------
+  Micro-MBA *UCSD Rady School of Business*      *Summer 2020*
+  ------------------------------------------- ---------------
+
+\
+
+  ----------------------------------------------------- ---------------
+  HPC User Training *San Diego Supercomputer Center*      *Spring 2020*
+  ----------------------------------------------------- ---------------
+
+\
+
+::: shaded
+:::
+
+\
+MATLAB, Python and Jupyter, IDL, LaTex, Microsoft Office, linux/unix,
+ArcGIS Arcmap, SQLite, C++, Github (Desktop)\
+
+::: shaded
+:::
+
+\
+
+<<<<<<< HEAD
+B. J. DeCourcy, Y.-T. Lin, W. G. Zhang, **E. R. Ozanich**, N. Kukshtel,
+M. Siderius, G. Gawarkiewicz, J. Forsyth, "Real-time joint acoustics and
+circulation modeling in the 2021 New England Shelf Break Acoustics
+Experiment,\" *J. Acoust. Soc. Am.* **152** (2022): 2859-2862.\
+**E. Ozanich**, G. Gawarkiewicz, Y. T. Lin, "Study of acoustic
+propagation across an oceanic front at the edge of the New England
+Shelf,\" *J. Acoust. Soc. Am.* **152** (2022): 3756-3767.\
+**E. Ozanich**, A. Thode, P. Gerstoft, L. A. Freeman, and S. Freeman,
+"Deep embedded clustering of coral reef bioacoustics,\" *J. Acoust. Soc.
+Am.* **149** (2021): 2587--2601.\
+**E. Ozanich**, P. Gerstoft, and H. Niu, "A feedforward neural network
+for direction-of-arrival estimation,\" *J. Acoust. Soc. Am.* **147**
+(2020): 2035--2048.\
+M. J. Bianco, P. Gerstoft, J. Traer, **E. Ozanich**, M. Roch, S. Gannot,
+and C.-A. Deledalle, "Machine learning in acoustics: Theory and
+applications,\" *J. Acoust. Soc. Am.* **146** (2019): 3590--3628.\
+=======
+Cupidatat ea do et in excepteur in. Ad nostrud ut est esse eu duis ea sunt eiusmod. Aliquip tempor veniam sint elit fugiat. Velit incididunt laboris amet incididunt labore dolore irure velit excepteur commodo deserunt laborum. Consectetur eu fugiat veniam veniam Lorem labore magna eiusmod. Ea occaecat reprehenderit pariatur consectetur minim labore ut aliquip.
+>>>>>>> 48e9caacbe400072293b5e4a69450827ca6994e6
+>>>>>>> Stashed changes
