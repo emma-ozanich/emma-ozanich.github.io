@@ -10,9 +10,9 @@ title: "Resume"
   <body>
 
 ### Education
-  *Ph.D. Oceanography -- Scripps Institution of Oceanography, La Jolla, California*     &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;December 2020    
-  *M.S. Oceanography -- Scripps Institution of Oceanography, La Jolla, California*     ```October 2017    ```
-  *B.S. Physics -- Hamline University, St. Paul, Minnesota*     ``````June 2014```
+  *Ph.D. Oceanography -- Scripps Institution of Oceanography, La Jolla, California*     &nbsp;&nbsp;December 2020    
+  *M.S. Oceanography -- Scripps Institution of Oceanography, La Jolla, California*  &nbsp;&nbsp;  October 2017  
+  *B.S. Physics -- Hamline University, St. Paul, Minnesota*  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; June 2014
   
 ### Experience
   - **JASCO Applied Sciences** -- *Project Scientist*, Remote (Arvada, CO)    &ensp;&ensp;&ensp;&ensp; March 2022 - Present
