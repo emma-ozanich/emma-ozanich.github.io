@@ -12,7 +12,7 @@ title: "Resume"
 ### Education
   *Ph.D. Oceanography -- Scripps Institution of Oceanography, La Jolla, California*     &ensp;&ensp;&ensp;&ensp;December 2020    
   *M.S. Oceanography -- Scripps Institution of Oceanography, La Jolla, California*     &ensp;&ensp;&ensp;&ensp;&ensp;October 2017    
-  *B.S. Physics -- Hamline University, St. Paul, Minnesota*     &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;June 2014
+  *B.S. Physics -- Hamline University, St. Paul, Minnesota*     &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;June 2014
   
 ### Experience
   - **JASCO Applied Sciences** -- *Project Scientist*, Remote (Arvada, CO)    &ensp;&ensp;&ensp;&ensp; March 2022 - Present
@@ -62,8 +62,8 @@ title: "Resume"
     time--frequency (Fourier) methods with unsupervised machine learning
     
 ## Certificates
-Micro-MBA *UCSD Rady School of Business*      *Summer 2020*    
-HPC User Training *San Diego Supercomputer Center*      *Spring 2020*
+Micro-MBA *UCSD Rady School of Business*      Summer 2020
+HPC User Training *San Diego Supercomputer Center*      Spring 2020
 
 ## Software
 MATLAB, Python and Jupyter, IDL, LaTex, Microsoft Office, linux/unix,
