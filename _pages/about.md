@@ -11,7 +11,7 @@ title: "Resume"
   
 ### Experience
   **JASCO Applied Sciences** -- *Project Scientist*, Remote (Arvada, CO)     March 2022 - Present
-    -   Numerically model the noise impact of large ocean construction
+    -Numerically model the noise impact of large ocean construction
     projects on marine fauna with parabolic equation (PE), ray-based
     models for far-field, and finite-element stress waves for near-field
     acoustics using Harris Geospatial IDL
