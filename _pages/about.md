@@ -15,7 +15,7 @@ title: "Resume"
   *B.S. Physics -- Hamline University, St. Paul, Minnesota*  &ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp; &ensp;&ensp; June 2014
   
 ### Experience
-  - **JASCO Applied Sciences** -- *Project Scientist*, Remote (Arvada, CO)   &ensp;&ensp;&ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp; March 2022 - Present
+  - **JASCO Applied Sciences** -- *Project Scientist*, Remote (Arvada, CO)   &ensp;&ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp; March 2022 - Present
       -  Numerically model the noise impact of large ocean construction
     projects on marine fauna with parabolic equation (PE), ray-based
     models for far-field, and finite-element stress waves for near-field
