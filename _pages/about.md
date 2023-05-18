@@ -1,4 +1,7 @@
-<<<<<<< HEAD
+---
+permalink: /about/
+title: "Resume"
+---
 =======
 ---
 permalink: /about/
