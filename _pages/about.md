@@ -1,6 +1,7 @@
 ---
 permalink: /about/
 title: "Resume"
+<link rel="stylesheet" href="font_stylesheet.css">
 ---
 
 
