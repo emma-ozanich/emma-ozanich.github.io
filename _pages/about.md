@@ -10,12 +10,12 @@ title: "Resume"
   <body>
 
 ### Education
-  *Ph.D. Oceanography -- Scripps Institution of Oceanography, La Jolla, California*   &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&nbsp;  December 2020  
-  *M.S. Oceanography -- Scripps Institution of Oceanography, La Jolla, California* &ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp;  October 2017  
-  *B.S. Physics -- Hamline University, St. Paul, Minnesota*  &ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp; &ensp;&ensp; June 2014
+  *Ph.D. Oceanography -- Scripps Institution of Oceanography, La Jolla, California*   &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&nbsp; &ensp;&ensp;&ensp;&ensp;  December 2020  
+  *M.S. Oceanography -- Scripps Institution of Oceanography, La Jolla, California* &ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp; October 2017  
+  *B.S. Physics -- Hamline University, St. Paul, Minnesota*  &ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp;&ensp;&ensp; June 2014
   
 ### Experience
-  - **JASCO Applied Sciences** -- *Project Scientist*, Remote (Arvada, CO)   &ensp;&ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp; March 2022 - Present
+  - **JASCO Applied Sciences** -- *Project Scientist*, Remote (Arvada, CO)   &ensp;&ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp;March 2022 - Present
       -  Numerically model the noise impact of large ocean construction
     projects on marine fauna with parabolic equation (PE), ray-based
     models for far-field, and finite-element stress waves for near-field
@@ -27,7 +27,7 @@ title: "Resume"
       -  Build and improve algorithmic models for simulated acoustic data
     analysis in IDL
 
-  - **Woods Hole Oceanographic Institution** -- *Postdoctoral Investigator*, Woods Hole, MA     January 2021 - February 2022
+  - **Woods Hole Oceanographic Institution** -- *Postdoctoral Investigator*, Woods Hole, MA  &ensp;&ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp;January 2021 - February 2022
       -  Investigated ocean acoustic propagation in 3D-varying underwater
     index of refraction due to Gulf-stream induced temperature gradient,
     with PE modeling in MATLAB
@@ -39,7 +39,7 @@ title: "Resume"
       -  At-sea data collection operations, including shipboard sonar
     operation and time-syncing acoustic clocks to DGPS reference
 
- -  **University of California San Diego** -- *Graduate Student Researcher*, San Diego, CA     June 2014 - December 2020
+ -  **University of California San Diego** -- *Graduate Student Researcher*, San Diego, CA  &ensp;&ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp;June 2014 - December 2020
       -  Conventional and Bayesian signal processing for underwater acoustic
     data analysis in MATLAB
       -  Wrote an unsupervised image-based clustering pipeline to group
