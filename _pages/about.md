@@ -1,6 +1,5 @@
 ---
 permalink: /about/
-<<<<<<< HEAD
 title: "Resume"
 ---
 
