@@ -49,7 +49,9 @@
   h3,
   h4,
   h5,
-  h6 {
+  h6,
+  h7,
+  h8 {
     margin-bottom: 0;
     font-family: $sans-serif-narrow;
   }
@@ -124,8 +126,8 @@
 .author__avatar {
   display: table-cell;
   vertical-align: top;
-  width: 36px;
-  height: 36px;
+  width: 500px; //original: 36px
+  height: auto; //original: 36px
 
   @include breakpoint($large) {
     display: block;
@@ -134,8 +136,8 @@
   }
 
   img {
-    max-width: 110px;
-    border-radius: 50%;
+    max-width: 500px; //original: 110px
+    border-radius: 0%; //original: 50%
 
     @include breakpoint($large) {
       padding: 5px;
@@ -147,7 +149,7 @@
 .author__content {
   display: table-cell;
   vertical-align: top;
-  padding-left: 15px;
+  padding-left: 5px;
   padding-right: 25px;
   line-height: 1;
 
@@ -168,7 +170,7 @@
   margin: 0;
 
   @include breakpoint($large) {
-    margin-top: 10px;
+    margin-top: 20px;
     margin-bottom: 10px;
   }
 }
@@ -179,6 +181,29 @@
 
 .author__bio {
   margin: 0;
+  font-size: 0.9em;
+  font-style: italic;
+
+  @include breakpoint($large) {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+}
+
+.author__bio_more {
+  margin: 0;
+  font-size: 0.9em;
+  font-style: italic;
+
+  @include breakpoint($large) {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+}
+.author__bio_more_more {
+  margin: 0;
+  font-size: 0.9em;
+  font-style: italic;
 
   @include breakpoint($large) {
     margin-top: 10px;
@@ -297,11 +322,6 @@
     @include breakpoint($large) {
       display: none;
     }
-  }
-
-  ul {
-    padding: 10px;
-    list-style-type: none;
   }
 
   li {

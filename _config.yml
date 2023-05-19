@@ -26,10 +26,9 @@ markdown: kramdown
 remote_theme: mmistakes/minimal-mistakes
 # Outputting
 permalink: /:categories/:title/
-paginate: 2 # amount of posts to show
+paginate: 3 # amount of posts to show
 paginate_path: /page:num/
-timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-grid: 2
+timezone: America/Denver # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 include:
   - _pages
@@ -60,11 +59,16 @@ plugins:
 author:
   name   : "Emma Ozanich"
   avatar : "Emma-Ozanich.jpg"
-  bio    : "Physical scientist/engineer using wave models and real-world data to study ocean sound!"
+  bio    : Scientist/engineer in ocean acoustics 
+  bio_more: "In 2014, I moved from land-locked Minnesota to California to study the physics of sound in the ocean. I've since sailed on the Pacific and Atlantic & learned a lot about processing acoustic signals underwater! I now help companies predict their noise impact on marine life from my home base near the Rocky Mountains."
+  bio_more_more: "Please send a quick note, I'd love to chat!"
   links:
-    - label: "GitHub"
-      icon: "emma-ozanich"
-      url: "https://github.com/"
+   - label: "Email"
+     icon: "fas fa-fw fa-envelope-square"
+     url: emmareevesozanich@gmail.com
+  location: "Denver Area (CO)"
+
+masthead_title           : " " # overrides the website title displayed in the masthead, use " " for no title
 
 footer:
   links:
