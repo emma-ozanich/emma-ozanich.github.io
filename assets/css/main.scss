@@ -12,8 +12,8 @@ search: false
 .author__avatar {
 display: table-cell;
 vertical-align: top;
-width: 80px; //original: 36px
-height: 80px; //original: 36px
+width: 160px; //original: 36px
+height: auto; //original: 36px
 
 @include breakpoint($large) {
 display: block;
@@ -33,106 +33,3 @@ border-radius: 0%;
 }
 }
   
-  .author__bio {
-  margin: 0;
-  font-size: 0.9em;
-  font-style: italic;
-
-  @include breakpoint($large) {
-    margin-top: 10px;
-    margin-bottom: 20px;
-  }
-}
-}
-
-.page__content {
-  h2 {
-    padding-bottom: 0.5em;
-    border-bottom: 1px solid $border-color;
-  }
-
-	h1, h2, h3, h4, h5, h6 {
-		.header-link {
-			position: relative;
-			left: 0.5em;
-			opacity: 0;
-			font-size: 0.8em;
-			-webkit-transition: opacity 0.2s ease-in-out 0.1s;
-			-moz-transition: opacity 0.2s ease-in-out 0.1s;
-			-o-transition: opacity 0.2s ease-in-out 0.1s;
-			transition: opacity 0.2s ease-in-out 0.1s;
-		}
-
-		&:hover .header-link {
-			opacity: 1;
-		}
-	}
-
-  p,
-  li,
-  dl {
-    font-size: 0.75em;
-  }
-
-  /* paragraph indents */
-  p {
-    margin: 0 0 $indent-var;
-
-    /* sibling indentation*/
-    @if $paragraph-indent == true {
-      & + p {
-        text-indent: $indent-var;
-        margin-top: -($indent-var);
-      }
-    }
-  }
-
-  a:not(.btn) {
-    &:hover {
-      text-decoration: underline;
-
-      img {
-        box-shadow: 0 0 10px rgba(#000, 0.25);
-      }
-    }
-  }
-
-  :not(pre) > code {
-    padding-top: 0.1rem;
-    padding-bottom: 0.1rem;
-    font-size: 0.8em;
-    background: $code-background-color;
-    border-radius: $border-radius;
-
-    &::before,
-    &::after {
-      letter-spacing: -0.2em;
-      content: "\00a0"; /* non-breaking space*/
-    }
-  }
-
-  dt {
-    margin-top: 1em;
-    font-family: $sans-serif;
-    font-weight: bold;
-  }
-
-  dd {
-    margin-left: 1em;
-    font-family: $sans-serif;
-    font-size: $type-size-6;
-  }
-
-  .small {
-    font-size: $type-size-6;
-  }
-
-  /* blockquote citations */
-  blockquote + .small {
-    margin-top: -1.5em;
-    padding-left: 1.25rem;
-  }
-}
-
-$global-font-family: $helvetica, Arial !default;
-
