@@ -6,14 +6,17 @@ header:
   teaser: Figure14.png
 ---
 
+# Overview
+A deep embedded clustering algorithm was developed to separate fish calls and whale song from coral reef ambient noise using the spectrogram representations.
+
+
+![alt text](Fish_Call_Timeseries.png) 
+$\xrightarrow[\text{world}]{\text{hello}}$ ![alt text](Fish_Call_Spectrogram.png)
+
 E. Ozanich, A. Thode, P. Gerstoft, L. A. Freeman, and S. Freeman, “Deep embedded clustering of coral reef bioacoustics,”
 _*J. Acoust. Soc. Am. 149*_ (2021): 2587–2601
 
 ```ruby
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
+My code here
 ```
 
