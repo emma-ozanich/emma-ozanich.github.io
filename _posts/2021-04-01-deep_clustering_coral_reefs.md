@@ -8,6 +8,9 @@ header:
   teaser: assets/images/Figure14.png
 classes: wide
 ---
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
 
 A deep embedded clustering (DEC) algorithm was developed to separate fish calls and whale song in coral reef ambient noise. We applied image processing to spectrograms (time-frequency) of the sounds. 
 
