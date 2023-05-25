@@ -2,15 +2,6 @@
 layout: archive
 ---
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
-  MathJax.InputJax.TeX.prefilterHooks.Add(function (data) {
-    data.math = data.math.replace(/^% <!\[CDATA\[/, '').replace(/%\]\]>$/, '');
-  });
-});
-</script>
-
-{% include jsmath.js %}
 {{ content }}
 
 <ul class="taxonomy__index">
@@ -37,3 +28,5 @@ MathJax.Hub.Register.StartupHook('TeX Jax Ready', function () {
     <a href="#page-title" class="back-to-top">{{ site.data.ui-text[site.locale].back_to_top | default: 'Back to Top' }} &uarr;</a>
   </section>
 {% endfor %}
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript" ></script>
