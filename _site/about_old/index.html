@@ -9,7 +9,7 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>About - Project homepage of Emma Ozanich</title>
+<!-- begin _includes/seo.html --><title>About - Emma Ozanich - Project homepage</title>
 <meta name="description" content="Welcome! Browse this page to learn about my cool research using machine learning for ocean acoustics at Scripps; plus, new projects will be added as I explore new topics in data science!">
 
 
@@ -19,7 +19,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
-<meta property="og:site_name" content="Project homepage of Emma Ozanich">
+<meta property="og:site_name" content="Emma Ozanich - Project homepage">
 <meta property="og:title" content="About">
 <meta property="og:url" content="http://localhost:4000/about_old/">
 
@@ -63,7 +63,7 @@
 
 
 
-  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Project homepage of Emma Ozanich Feed">
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Emma Ozanich - Project homepage Feed">
 
 
 <!-- https://t.co/dKP3o1e -->
@@ -80,11 +80,20 @@
 
 
 
-    <!-- start custom head snippets -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
-<!-- insert favicons. use https://realfavicongenerator.net/ -->
-
-<!-- end custom head snippets -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+      processEscapes: true
+    },
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script> 
 
   </head>
 
@@ -159,7 +168,7 @@
     </h3>
     
       <div class="author__bio p-note" itemprop="description">
-        <p>Scientist/engineer in ocean acoustics</p>
+        <p>Scientist/engineer in signal processing</p>
 
       </div>
     
@@ -250,7 +259,7 @@
     <meta itemprop="headline" content="About">
     
     
-    
+    <meta itemprop="dateModified" content="2023-05-17T22:28:21-06:00">
 
     <div class="page__inner-wrap">
       
@@ -280,6 +289,8 @@
 
 
         
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2023-05-17">May 17, 2023</time></p>
 
       </footer>
 
@@ -333,7 +344,7 @@
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2023 Project homepage of Emma Ozanich. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy;  Emma Ozanich - Project homepage. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>

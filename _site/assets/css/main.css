@@ -1214,11 +1214,11 @@ body { display: -webkit-box; display: -ms-flexbox; display: flex; min-height: 10
 .author__bio { margin: 0; font-size: 0.9em; font-style: italic; }
 @media (min-width: 64em) { .author__bio { margin-top: 10px; margin-bottom: 20px; } }
 
-.author__bio_more { margin: 0; font-size: 0.9em; font-style: italic; }
-@media (min-width: 64em) { .author__bio_more { margin-top: 10px; margin-bottom: 20px; } }
+.author__bio-more { margin: 0; font-size: 0.9em; font-style: italic; }
+@media (min-width: 64em) { .author__bio-more { margin-top: 10px; margin-bottom: 20px; } }
 
-.author__bio_more_more { margin: 0; font-size: 0.9em; font-style: italic; }
-@media (min-width: 64em) { .author__bio_more_more { margin-top: 10px; margin-bottom: 20px; } }
+.author__bio-more-more { margin: 0; font-size: 0.9em; font-style: italic; }
+@media (min-width: 64em) { .author__bio-more-more { margin-top: 10px; margin-bottom: 20px; } }
 
 .author__urls-wrapper { position: relative; display: table-cell; vertical-align: middle; font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif; z-index: 20; cursor: pointer; }
 .author__urls-wrapper li:last-child a { margin-bottom: 0; }
