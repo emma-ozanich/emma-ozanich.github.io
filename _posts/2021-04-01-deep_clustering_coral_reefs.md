@@ -17,7 +17,7 @@ A deep embedded clustering (DEC) algorithm was developed to separate fish calls 
 
 <p align="center"><img src="/assets/images/reefnoise_long.png" alt="drawing" width="100%"/></p>
 
-
+$$ A=B^2$$
 The DEC uses a convolutional auto-encoder (CAE) to obtain low-dimensional kernels from the image. Then, a similarity loss is applied to the kernels (clustering layer), the CAE is retrained with a joint loss, and the class labels are generated for each sample.
 
 <p align="center"><img src="/assets/images/Figure4-1.png" alt="drawing" width="65%"/> </p>
