@@ -60,8 +60,8 @@ author:
   name   : "Emma Ozanich"
   avatar : "Emma-Ozanich.jpg"
   bio    : Scientist/engineer in signal processing
-  bio_more: "In 2014, I moved from land-locked Minnesota to California to study the physics of sound in the ocean. I've since sailed on the Pacific and Atlantic & learned a lot about processing acoustic signals underwater! I now help companies predict their noise impact on marine life from my home base near the Rocky Mountains."
-  bio_more_more: "Please send a quick note, I'd love to chat!"
+  bio-more: "In 2014, I moved from land-locked Minnesota to California to study the physics of sound in the ocean. I've since sailed on the Pacific and Atlantic & learned a lot about processing acoustic signals underwater! I now help companies predict their noise impact on marine life from my home base near the Rocky Mountains."
+  bio-more-more: "Please send a quick note, I'd love to chat!"
   links:
    - label: "Email"
      icon: "fas fa-fw fa-envelope-square"
