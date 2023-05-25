@@ -1,37 +1,31 @@
 var store = [{
-        "title": "Post: Standard",
-        "excerpt":"All children, except one, grow up. They soon know that they will grow up, and the way Wendy knew was this. One day when she was two years old she was playing in a garden, and she plucked another flower and ran with it to her mother. I suppose she...","categories": ["Blog"],
-        "tags": ["Post Formats","readability","standard"],
-        "url": "/blog/post-standard/",
+        "title": "Eastern Arctic ambient noise",
+        "excerpt":"In Progress  ","categories": ["ocean acoustics","signal processing"],
+        "tags": [],
+        "url": "/ocean%20acoustics/signal%20processing/Ice-Noise/",
         "teaser": null
       },{
-        "title": "Post: Chat",
-        "excerpt":"Abbott: Strange as it may seem, they give ball players nowadays very peculiar names. Costello: Funny names? Abbott: Nicknames, nicknames. Now, on the St. Louis team we have Who’s on first, What’s on second, I Don’t Know is on third– Costello: That’s what I want to find out. I want...","categories": ["Blog"],
-        "tags": ["chat","Post Formats"],
-        "url": "/blog/post-chat/",
+        "title": "Acoustics on the New England Shelfbreak",
+        "excerpt":"In Progress  ","categories": ["ocean acoustics","signal processing"],
+        "tags": [],
+        "url": "/ocean%20acoustics/signal%20processing/Propagation-on-NE-Shelfbreak/",
         "teaser": null
       },{
-        "title": "Post: Notice",
-        "excerpt":"A notice displays information that explains nearby content. Often used to call attention to a particular detail. When using Kramdown {: .notice} can be added after a sentence to assign the .notice to the &lt;p&gt;&lt;/p&gt; element. Changes in Service: We just updated our privacy policy here to better service our...","categories": ["Blog"],
-        "tags": ["Post Formats","notice"],
-        "url": "/blog/post-notice/",
-        "teaser": null
+        "title": "Environmental data from NOAA BigQuery",
+        "excerpt":"In Progress  ","categories": ["earth science"],
+        "tags": [],
+        "url": "/earth%20science/NOAA-BigQuery/",
+        "teaser": "/assets/images/windspeed_hveravellier.jpg"
       },{
-        "title": "Post: Quote",
-        "excerpt":"   Only one thing is impossible for God: To find any sense in any copyright law on the planet.       Mark Twain   ","categories": ["Blog"],
-        "tags": ["Post Formats","quote"],
-        "url": "/blog/post-quote/",
-        "teaser": null
-      },{
-        "title": "Post: Link",
-        "excerpt":"This theme supports link posts, made famous by John Gruber. To use, just add link: http://url-you-want-linked to the post’s YAML front matter and you’re done.      And this is how a quote looks.    Some link can also be shown.  ","categories": ["Blog"],
-        "tags": ["link","Post Formats"],
-        "url": "/blog/post-link/",
+        "title": "Deep network for direction-of-arrival estimation",
+        "excerpt":"In Progress  ","categories": ["ocean acoustics","signal processing"],
+        "tags": [],
+        "url": "/ocean%20acoustics/signal%20processing/DNN-for-DOA/",
         "teaser": null
       },{
         "title": "Deep clustering in coral reef noise",
-        "excerpt":"E. Ozanich, A. Thode, P. Gerstoft, L. A. Freeman, and S. Freeman, “Deep embedded clustering of coral reef bioacoustics,” *J. Acoust. Soc. Am. 149* (2021): 2587–2601   def print_hi(name)   puts \"Hi, #{name}\" end print_hi('Tom') #=&gt; prints 'Hi, Tom' to STDOUT.   ","categories": ["ocean acoustics"],
+        "excerpt":"A deep embedded clustering (DEC) algorithm was developed to separate fish calls and whale song in coral reef ambient noise. We applied image processing to spectrograms (time-frequency) of the sounds. The DEC uses a convolutional auto-encoder (CAE) to obtain low-dimensional kernels from the image. Then, a similarity loss is applied...","categories": ["ocean acoustics","bioacoustics","convolutional autoencoder"],
         "tags": [],
-        "url": "/ocean%20acoustics/deep_clustering_coral_reefs/",
-        "teaser": "/Figure14.png"
+        "url": "/ocean%20acoustics/bioacoustics/convolutional%20autoencoder/deep_clustering_coral_reefs/",
+        "teaser": "/assets/images/Figure14.png"
       }]

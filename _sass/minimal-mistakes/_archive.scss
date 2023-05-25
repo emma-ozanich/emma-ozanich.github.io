@@ -87,16 +87,15 @@
 
 .archive__item-teaser {
   position: relative;
-  border-radius: $border-radius;
   overflow: hidden;
-
+  border-radius: $border-radius;
   img {
     width: 100%;
   }
 }
 
 .archive__item-caption {
-  position: absolute;
+  position: relative;
   bottom: 0;
   right: 0;
   margin: 0 auto;
@@ -221,11 +220,11 @@
 
   .archive__item-teaser {
     @include breakpoint($small) {
-      max-height: 200px;
+      max-height: 400px;
     }
 
     @include breakpoint($medium) {
-      max-height: 120px;
+      max-height: 210px;
     }
   }
 }

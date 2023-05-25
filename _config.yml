@@ -13,7 +13,7 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Project homepage of Emma Ozanich
+title: Emma Ozanich - Project homepage
 email: emmareevesozanich@gmail.com
 description: Welcome! Browse this page to learn about my cool research using machine learning for ocean acoustics at Scripps; plus, new projects will be added as I explore new topics in data science!
 #twitter_username: username
@@ -59,7 +59,7 @@ plugins:
 author:
   name   : "Emma Ozanich"
   avatar : "Emma-Ozanich.jpg"
-  bio    : Scientist/engineer in ocean acoustics 
+  bio    : Scientist/engineer in signal processing
   bio_more: "In 2014, I moved from land-locked Minnesota to California to study the physics of sound in the ocean. I've since sailed on the Pacific and Atlantic & learned a lot about processing acoustic signals underwater! I now help companies predict their noise impact on marine life from my home base near the Rocky Mountains."
   bio_more_more: "Please send a quick note, I'd love to chat!"
   links:

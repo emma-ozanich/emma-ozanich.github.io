@@ -1,0 +1,519 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Deep clustering in coral reef noise - Project homepage of Emma Ozanich</title>
+<meta name="description" content="A deep embedded clustering (DEC) algorithm was developed to separate fish calls and whale song in coral reef ambient noise. We applied image processing to spectrograms (time-frequency) of the sounds.">
+
+
+  <meta name="author" content="Emma Ozanich">
+  
+  <meta property="article:author" content="Emma Ozanich">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Project homepage of Emma Ozanich">
+<meta property="og:title" content="Deep clustering in coral reef noise">
+<meta property="og:url" content="http://localhost:4000/ocean%20acoustics/bioacoustics/convolutional%20autoencoder/deep_clustering_coral_reefs/">
+
+
+  <meta property="og:description" content="A deep embedded clustering (DEC) algorithm was developed to separate fish calls and whale song in coral reef ambient noise. We applied image processing to spectrograms (time-frequency) of the sounds.">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/Figure14.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2021-04-01T00:00:00-06:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/ocean%20acoustics/bioacoustics/convolutional%20autoencoder/deep_clustering_coral_reefs/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Project homepage of Emma Ozanich Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+           
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/about/">Resume</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/Emma-Ozanich.jpg" alt="Emma Ozanich" itemprop="image" class="u-photo"
+		      width = 3000pt
+		      height = auto>
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Emma Ozanich</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Scientist/engineer in ocean acoustics</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Denver Area (CO)</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="emmareevesozanich@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Deep clustering in coral reef noise">
+    <meta itemprop="description" content="A deep embedded clustering (DEC) algorithm was developed to separate fish calls and whale song in coral reef ambient noise. We applied image processing to spectrograms (time-frequency) of the sounds.">
+    <meta itemprop="datePublished" content="2021-04-01T00:00:00-06:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/ocean%20acoustics/bioacoustics/convolutional%20autoencoder/deep_clustering_coral_reefs/" class="u-url" itemprop="url">Deep clustering in coral reef noise
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>A deep embedded clustering (DEC) algorithm was developed to separate fish calls and whale song in coral reef ambient noise. We applied image processing to spectrograms (time-frequency) of the sounds.</p>
+
+<p align="center"><img src="/assets/images/reefnoise_long.png" alt="drawing" width="100%" /></p>
+
+<p>The DEC uses a convolutional auto-encoder (CAE) to obtain low-dimensional kernels from the image. Then, a similarity loss is applied to the kernels (clustering layer), the CAE is retrained with a joint loss, and the class labels are generated for each sample.</p>
+
+<p align="center"><img src="/assets/images/Figure4-1.png" alt="drawing" width="65%" /> </p>
+
+<p>More details can be found in our paper:</p>
+
+<p>E. Ozanich, A. Thode, P. Gerstoft, L. A. Freeman, and S. Freeman, “Deep embedded clustering of coral reef bioacoustics,”
+<em>J. Acoust. Soc. Am. 149</em> (2021): 2587–2601.</p>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<h2 id="data-generation-and-processing">Data Generation and Processing</h2>
+<p>Fish communicate with series of pulses, or trains, that are generated with their swim bladders. We simulate pulse trains using a Gaussian-modulated sinusoid with <em>N</em> \(\in\lfloor 13 \times beta(3.5, 8)\rfloor\) random pulses and a center frequency \(f_c\) based on observations of real fish pulses. The pulses are randomly offset and spaced at a random <em>dt</em>. The random seed and reference phase are fixed, which guarantees we are always generating the same dataset!</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+<span class="n">iphase</span> <span class="o">=</span> <span class="n">rd</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+	<span class="err">⋮</span>
+	<span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="n">np</span><span class="p">.</span><span class="n">sin</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">fc</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="n">dt</span><span class="o">*</span><span class="n">ii</span><span class="o">-</span><span class="n">offset</span><span class="p">)</span><span class="o">+</span><span class="n">iphase</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="n">dt</span><span class="o">*</span><span class="n">ii</span><span class="o">-</span><span class="n">offset</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The discrete fourier transform (DFT) is applied in overlapping segments to generate a spectrogram. As an image, we keep only the magnitude (absolute value). The DFT “smears” the fish pulses, which are shorter than the DFT length! We use the same DFT length for fish calls and whale song, aiming for a happy medium between good time resolution and frequency resolution of both.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><img align="center" src="/assets/images/Fish_Call_Timeseries.png" alt="drawing" width="100%" /></td>
+      <td>\(\xrightarrow[]{\text{DFT}}\)</td>
+      <td><img align="center" src="/assets/images/Fish_Call_Spectrogram.png" alt="drawing" width="97%" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Humpback whales were heard calling offshore during our experiment. Their songs are non-impulsive frequency-modulated sinusoids, or quadratic sweeps. The duration of the sweep <em>T</em>, start frequency \(f_0\), and bandwidth <em>df</em> are based on observed data and previous studies. The call can have an upsweep (<em>df</em> &gt; 0) or a downsweep (<em>df</em> &lt; 0).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+<span class="n">delta</span> <span class="o">=</span> <span class="p">(</span><span class="n">t</span><span class="o">&gt;</span><span class="n">offset</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="o">&lt;</span><span class="p">(</span><span class="n">offset</span><span class="o">+</span><span class="n">T</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">delta</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="n">sin</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">df</span><span class="o">/</span><span class="p">(</span><span class="n">T</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="n">offset</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="n">f0</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="n">offset</span><span class="p">)</span> <span class="o">+</span> <span class="n">rd</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<table>
+  <tbody>
+    <tr>
+      <td><img align="center" src="/assets/images/Whale_Call_Timeseries.png" alt="drawing" width="100%" /></td>
+      <td>\(\xrightarrow[]{\text{DFT}}\)</td>
+      <td><img align="center" src="/assets/images/Whale_Call_Spectrogram.png" alt="drawing" width="97%" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Both signals are normalized to their maximum, and then Gaussian noise is added with a random signal-to-noise ratio (SNR) using \(\sigma\).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">⋮</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">/</span><span class="n">np</span><span class="p">.</span><span class="nb">max</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[:]))</span>
+<span class="n">xn</span> <span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="n">sigma</span><span class="o">*</span><span class="n">rd</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>The reconstructed images serve as simplified versions of the observed data, allowing us to test the effect of relative class ratios on the DEC model, and to use transfer learning from the simulated data to real data.</p>
+
+<p align="center"><img src="/assets/images/simulated_calls.png" alt="drawing" width="60%" /></p>
+
+<h2 id="deep-embedded-clustering">Deep embedded clustering</h2>
+<p>A convolutional autoencoder is used discover informative 5x4 kernels of the original image (left panel) and reconstruct it from the reduced-dimension kernels (panel 2). At the smallest dimension, the kernels are flattened into 10x1 vectors representing the image. The mean squared error (MSE) between the reconstructed image and the original image is used to tune the CAE weights and kernels for the best reproduction.</p>
+
+<p align="center"><img src="/assets/images/DEC_recon_example.png" alt="drawing" width="60%" /></p>
+
+<p>Then, a cluster loss is included at the kernel layer, and the CAE weights are tuned with both MSE and the cluster loss to make the kernels more separable (panel 3)</p>
+
+<p align="center"> $$ L = 0.1\cdot KL + 0.9\cdot MSE $$ </p>
+<p>.</p>
+
+<p><em>KL</em> is the Kullback-Leibler divergence,</p>
+
+<p align="center"> $$KL(P||Q) = \sum_n \sum_k p_{nk} \log \left(\frac{p_{nk}}{q_{nk}} \right) $$ </p>
+
+<p>\(q_{nk}\) is the empirical Student’s t-distribution of the kernel variables around their cluster means, which are initialized with K-means.
+\(p_{nk}\) is the weighted squared distribution of \(q_{nk}\), and it puts more penalty on kernels that are further from their cluster center, causing them to have larger adjustments toward the center during training.</p>
+
+<h2 id="results">Results</h2>
+
+<p>Analysis of 100 simulations of different datasets shows the performance of the DEC on class separation using the spectrogram images. The known labels from the simulations were used to test the model performance.</p>
+
+<p>Three cases were considered: equal-sized groups (classes) of whale song and fish calls <strong>(a-c)</strong>, inequal-sized classes of whale song and fish call <strong>(d-f)</strong>, and equal-sized clsases of whale song, fish call, and whale song overlaying fish call <strong>(g-i)</strong>.
+Since we suspect many more fish calls than whale song after observing the experimental data, we test the effect of inequal class size on the model.</p>
+
+<p align="center"><img src="/assets/images/DEC_simulated.png" alt="drawing" width="60%" /></p>
+
+<p>Observing that DEC does not perform well for inequal class sizes, we added the Gaussian mixture means (GMM) method for comparison. GMM was applied directly to the kernels from CAE without additional training of the DEC.
+The DEC algorithm uses the K-means assumption of equi-distant clusters (fixed-variance Gaussians), whereas GMM learns the variance and the cluster means, allowing it to optimize cluster sizes.</p>
+
+<p align="center"><img src="/assets/images/DEC_experiment_updated.png" alt="drawing" width="60%" /></p>
+
+<p>Using some hand-labeled events detected in the experiment data, we show that the GMM does perform better than DEC due to the class imbalance in the real data.
+Unlike curated data, these raw data contain multiple, often overlapping, signals with varying SNR, including unknown signals not accounted for. Additional array processing and human labeling is needed to raise the accuracy from 77% to &gt;90%.</p>
+
+<p align="center"><img src="/assets/images/messy_classifications.png" alt="drawing" width="60%" /></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#bioacoustics" class="page__taxonomy-item p-category" rel="tag">bioacoustics</a><span class="sep">, </span>
+    
+      <a href="/categories/#convolutional-autoencoder" class="page__taxonomy-item p-category" rel="tag">convolutional autoencoder</a><span class="sep">, </span>
+    
+      <a href="/categories/#ocean-acoustics" class="page__taxonomy-item p-category" rel="tag">ocean acoustics</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2021-04-01T00:00:00-06:00">April 1, 2021</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Deep+clustering+in+coral+reef+noise%20http%3A%2F%2Flocalhost%3A4000%2Focean%2520acoustics%2Fbioacoustics%2Fconvolutional%2520autoencoder%2Fdeep_clustering_coral_reefs%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Focean%2520acoustics%2Fbioacoustics%2Fconvolutional%2520autoencoder%2Fdeep_clustering_coral_reefs%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Focean%2520acoustics%2Fbioacoustics%2Fconvolutional%2520autoencoder%2Fdeep_clustering_coral_reefs%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/ocean%20acoustics/signal%20processing/DNN-for-DOA/" class="pagination--pager" title="Deep network for direction-of-arrival estimation
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://github.com/" rel="nofollow noopener noreferrer"><i class="emma-ozanich" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Project homepage of Emma Ozanich. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>
