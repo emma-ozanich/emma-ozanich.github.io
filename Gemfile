@@ -14,6 +14,7 @@ group :jekyll_plugins do
   gem "jemoji"
   gem "jekyll-include-cache"
   gem 'jekyll-algolia', github: 'algolia/jekyll-algolia', ref: 'refs/pull/126/head'
+  gem "jekyll-last-modified-at"
 end
 
 gem "webrick"
