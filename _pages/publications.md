@@ -49,27 +49,28 @@ H. Niu, **E. Reeves**, and P. Gerstoft,
 *J. Acoust. Soc. Am.* **142** (2017): 1176--1188.
 
 # Published Abstracts Presented by Author
-Ozanich, DeCourcy, Lin (2021) "Modeling and observation of low-frequency propagation into warm core ring on the New England shelf slope," {\it Acoust. Soc. Am. 181st Meeting}, Seattle, WA, Nov. 2021.
 
-Ozanich, et al. (2021) "Deep embedded clustering of coral reef bioacoustics," {\it Acoust. Soc. Am. 180th Meeting}, Virtual meeting, June 2021.
+Ozanich, DeCourcy, Lin (2021) "Modeling and observation of low-frequency propagation into warm core ring on the New England shelf slope," *Acoust. Soc. Am. 181st Meeting*, Seattle, WA, Nov. 2021.
 
-Ozanich, et al. (2020) "Unsupervised clustering of coral reef fish calls," {\it Acoust. Soc. Am. 179th Meeting}, Virtual meeting, Dec. 2020.
+Ozanich, et al. (2021) "Deep embedded clustering of coral reef bioacoustics," *Acoust. Soc. Am. 180th Meeting*, Virtual meeting, June 2021.
 
-Ozanich, et al. (2019) "Detecting shifts in coral reef soundscape with unsupervised learning," {\it Acoust. Soc. Am. 178th Meeting}, San Diego, CA, Nov. 2019. 
+Ozanich, et al. (2020) "Unsupervised clustering of coral reef fish calls," *Acoust. Soc. Am. 179th Meeting*, Virtual meeting, Dec. 2020.
 
-Ozanich, Gerstoft, Niu (2019) "A deep network for single--snapshot direction of arrival estimation,"  {\it IEEE Mach. Learn. Sig. Proc.}, Pittsburgh, PA, Oct. 2019. 
+Ozanich, et al. (2019) "Detecting shifts in coral reef soundscape with unsupervised learning," *Acoust. Soc. Am. 178th Meeting*, San Diego, CA, Nov. 2019. 
 
-Ozanich, Gerstoft, Niu, (2019)  "Direction--of--arrival estimation using supervised machine learning," {\it IEEE Underwater Acoust. Sig. Proc.},  Whispering Pines Conf. Ctr., RI, Oct. 2019.
+Ozanich, Gerstoft, Niu (2019) "A deep network for single--snapshot direction of arrival estimation,"  *IEEE Mach. Learn. Sig. Proc.*, Pittsburgh, PA, Oct. 2019. 
 
-Ozanich, et al. (2018) "Ocean acoustic range estimation in noisy environments using convolutional networks," {\it Acoust, Soc. Am. 176th Meeting}, Victoria, B.C., Nov. 2018 (**2nd Student Paper, Acoustical Oceanography**}.
+Ozanich, Gerstoft, Niu, (2019)  "Direction--of--arrival estimation using supervised machine learning," *IEEE Underwater Acoust. Sig. Proc.*,  Whispering Pines Conf. Ctr., RI, Oct. 2019.
 
-Reeves and Gerstoft, (2018) "Ship azimuth prediction using supervised machine learning," {\it Acoust. Soc. Am. 175th Meeting}, Minneapolis, MN, May 2018.  
+Ozanich, et al. (2018) "Ocean acoustic range estimation in noisy environments using convolutional networks," *Acoust, Soc. Am. 176th Meeting*, Victoria, B.C., Nov. 2018 (**2nd Student Paper, Acoustical Oceanography**}.
 
-Niu, and Gerstoft, (2017) "Localization of circularly towed sources using machine learning methods," {\it Acoust. Soc. Am. 174th Meeting},  New Olreans, LA, Dec. 2017. 
+Reeves and Gerstoft, (2018) "Ship azimuth prediction using supervised machine learning," *Acoust. Soc. Am. 175th Meeting*, Minneapolis, MN, May 2018.  
 
-Reeves, Gerstoft, Worcester, and Dzieciuch, (2017)  "Arctic soundscape measured with a drifting vertical line array,"  {\it Acoust. Soc. Am. 173rd Meeting}, Boston, MA, June 2017.
+Niu, and Gerstoft, (2017) "Localization of circularly towed sources using machine learning methods," *Acoust. Soc. Am. 174th Meeting*,  New Olreans, LA, Dec. 2017. 
 
-Reeves, Gerstoft, Worcester, and Dzieciuch, (2016) "Detecting ice noise in Arctic ambient noise recorded on a drifting vertical line array," {\it Acoust. Soc. Am. 171st Meeting}, Salt Lake City, UT, May 2016.  
+Reeves, Gerstoft, Worcester, and Dzieciuch, (2017)  "Arctic soundscape measured with a drifting vertical line array,"  *Acoust. Soc. Am. 173rd Meeting*, Boston, MA, June 2017.
 
-Reeves, et al. (2013) "Using CReSIS airborne RADAR to constrain ice-volume influx across the lateral shear margins of the Northeast Greenland Ice Sheet," {\it AGU Fall  Meeting 2013}, San Francisco, CA, Dec. 2013.
+Reeves, Gerstoft, Worcester, and Dzieciuch, (2016) "Detecting ice noise in Arctic ambient noise recorded on a drifting vertical line array," *Acoust. Soc. Am. 171st Meeting*, Salt Lake City, UT, May 2016.  
+
+Reeves, et al. (2013) "Using CReSIS airborne RADAR to constrain ice-volume influx across the lateral shear margins of the Northeast Greenland Ice Sheet," *AGU Fall  Meeting 2013*, San Francisco, CA, Dec. 2013.
 *National Conference on Undergraduate Research*: E. Reeves (2013), 2013 Meeting.
