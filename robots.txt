@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://emma-ozanich.github.io/emma-ozanich.github.io/sitemap.xml
+Sitemap: https://alshedivat.github.io/al-folio/sitemap.xml
