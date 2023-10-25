@@ -24,4 +24,4 @@ With 8 years of research and industry experience, I specialize in timeseries dat
 While I work in variety of software languages as the situation requires,
 I'm most interested in the underyling models that tie pieces together.
 
-I enjoy a good data analysis problem. In many facets of my life -- the odds are good that I'll be researching more efficient and accurate ways of getting things done!
+I enjoy a good data analysis problems -- you'll find me researching more efficient and accurate ways of getting things done!
