@@ -29,7 +29,7 @@
         - title: Customize analysis software in IDL and R
           contents:
             - Compute acoustic waves with High-Performance Computing (HPC) 
-        - title: Present results to nontechnical clients in Powerpoint
+        - title: Present results to nontechnical clients
           contents:
             - Develop a Python Holoviz data dashboard with Matplotlib and Seaborn
             - Write a pipeline to parse .xlsx, .csv, and text to long-format tables in Python and R 
@@ -42,7 +42,7 @@
         - title: Investigated impacts of Gulf stream temperature on ocean acoustic travel paths 
           contents:
                 - Applied signal processing methods to analyze 2021 experimental data
-        - Ran GPU-accelerated mathematical (PDE) models
+        - Ran GPU-accelerated mathematical (PE) models
 
     - title: Graduate Researcher
       institution: University of California San Diego

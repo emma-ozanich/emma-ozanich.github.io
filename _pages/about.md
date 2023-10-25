@@ -21,7 +21,7 @@ social: true  # includes social icons at the bottom of the page
 
 I'm a project/data scientist with a PhD in signal, array processing and machine learning for ocean science applications.
 With 8 years of research and industry experience, I specialize in timeseries data analysis and visualization. 
-While I work in variety of software languages as the situation requires,
+I work in variety of software languages as the situation requires, and
 I'm most interested in the underyling models that tie pieces together.
 
-I enjoy a good data analysis problems -- you'll find me researching more efficient and accurate ways of getting things done!
+I enjoy a good data analysis problem -- you'll find me researching more efficient and accurate ways of getting things done!
