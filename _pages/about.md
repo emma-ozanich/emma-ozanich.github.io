@@ -20,8 +20,7 @@ social: true  # includes social icons at the bottom of the page
 ---
 
 I'm a project/data scientist with a PhD in signal, array processing and machine learning for ocean science applications.
-With 8 years of research and industry experience, I specialize in timeseries data analysis and visualization. 
-I work in variety of software languages as the situation requires, and
-I'm most interested in the underyling models that tie pieces together.
+With 8 years of research and industry experience, I specialize in timeseries data analysis, prediction, and visualization. 
+Recently, I've been self-learning data table packages in R and cloud compute tools in AWS Skill Builder and Coursera.
 
-I enjoy a good data analysis problem -- you'll find me researching more efficient and accurate ways of getting things done!
+I enjoy a good data analysis problem -- I love finding more efficient and accurate ways of getting things done!
