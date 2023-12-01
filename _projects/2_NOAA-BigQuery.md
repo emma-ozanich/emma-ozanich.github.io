@@ -6,7 +6,7 @@ categories:
 header:
   teaser: assets/images/windspeed_hveravellier.jpg
 importance: 2
-img: assets/img/windspeed_hveravellier.jpg
+img: assets/img/temperature_prediction_seasonal_Europe.png
 ---
 
 I created this demo for ECE 228 "Machine Learning for Physical Applications." It demonstrates how to load, visualize, and analyze data from the NOAA GSOD dataset.
