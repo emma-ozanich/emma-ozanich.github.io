@@ -9,8 +9,8 @@ importance: 2
 img: assets/img/windspeed_hveravellier.jpg
 ---
 
-A demo I created for ECE 228 "Machine Learning for Physical Applications." It demonstrates how to pull, clean, visualize and analyze public data from NOAA GSOD dataset using Google BigQuery.
-I have recently updated the demo to show how to predict seasonal timeseries trends: first, find the frequency/frequencies of the seasonality (one over the period); second, use seasonal ARIMA model trained on past data.
+I created this demo for ECE 228 "Machine Learning for Physical Applications." It demonstrates how to load, visualize, and analyze data from the NOAA GSOD dataset.
+In 2023, I've added a demo for prediction of seasonal timeseries, using the FFT to find major seasonal cycles, and SARIMAX (seasonal arima model) to predict.
 
 
 {::nomarkdown}
