@@ -9,7 +9,7 @@ profile:
   image: profile2.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
-    <p>Wheat Ridge, CO 80033</p>
+    <p>Denver, Colorado 80033</p>
     <p>emma.ozanich@jasco.com</p>
 
 
@@ -19,8 +19,11 @@ selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-I'm a scientist who uses statistics and signal processing to answer acoustics questions. My research used data-driven machine learning models to localize and characterize sound sources, and I currently use data analysis in R and Python to interpret the impacts of underwater construction sound on marine wildlife.
-One thing I love about my work are the rare but gratifying data-driven epiphanies! I'm currently learning about and getting certified in PostgresSQL and relational databases on freeCodeCamp.
+I'm an acoustic scientist using statistics and data analysis to answer interesting questions. 
+My research has studied machine learning methods for localizing ocean sound, and I'm currently using R and Python to statistically summarize and interpret the impacts of underwater construction sound on marine wildlife.
+One thing I love about my work are the rare data-driven epiphanies! 
 
-I'm a runner for fun - on the road and trails - and proud cat owner. Be it budgeting while running, or automating my workflow, I 
-love more efficient ways of getting things done!
+I like to run for fun - on the roads and trails - and am a proud cat owner. Both at home and at work, I thrive on finding more efficient ways of getting things done!
+
+My goal as a data scientist is to build skills and versatility, so I'm studying PostgresSQL and relational databases on freeCodeCamp.
+If you are looking for a scientist who can build, validate, and interpret complex data models and dig into difficult questions -- please send me an email and let's discuss!
