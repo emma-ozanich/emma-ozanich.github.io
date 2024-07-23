@@ -19,11 +19,9 @@ selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-I'm an acoustic scientist using statistics and data analysis to answer interesting questions. 
+I'm a scientist using statistics and data analysis to answer interesting questions. 
 My research has studied machine learning methods for localizing ocean sound, and I'm currently using R and Python to statistically summarize and interpret the impacts of underwater construction sound on marine wildlife.
 One thing I love about my work are the rare data-driven epiphanies! 
 
-I like to run for fun - on the roads and trails - and am a proud cat owner. Both at home and at work, I thrive on finding more efficient ways of getting things done!
-
-My goal as a data scientist is to build skills and versatility, so I'm studying PostgresSQL and relational databases on freeCodeCamp.
+My goal as a data scientist is to build skills and versatility.
 If you are looking for a scientist who can build, validate, and interpret complex data models and dig into difficult questions -- please send me an email and let's discuss!
