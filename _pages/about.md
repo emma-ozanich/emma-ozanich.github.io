@@ -19,8 +19,9 @@ selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-I'm a project/data scientist with a PhD in signal, array processing and machine learning for ocean science applications.
-With 8 years of research and industry experience, I specialize in timeseries data analysis, prediction, and visualization. 
-Recently, I've been self-learning data table packages in R and cloud compute tools in AWS Skill Builder and Coursera.
+I'm a scientist specializing in statistics and signal processing. As a researcher, I developed data-driven machine learning models to better localize and characterize sound sources. 
+Since working in industry, I've used a variety of data analysis techniques in R and Python to interpret the impacts of underwater construction sound on marine wildlife.
+I really love data-driven epiphanies (those a-ha trends you never expected!) and I'm currently using freeCodeCamp to learn about PostgresSQL and revisit my machine learning background.
 
-I enjoy a good data analysis problem -- I love finding more efficient and accurate ways of getting things done!
+Outside of work, I'm a passionate runner - on the road and trails - and a proud cat owner and past foster-parent. And whether I'm running while budgeting or just automating my workflow, I 
+love finding more efficient ways of getting things done!
