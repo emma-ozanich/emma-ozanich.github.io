@@ -10,7 +10,7 @@ profile:
   image_circular: false # crops the image to make it circular
   more_info: >
     <p>Wheat Ridge, CO 80033</p>
-    <p>usa@jasco.com</p>
+    <p>emma.ozanich@jasco.com</p>
 
 
 news: false  # includes a list of news items
@@ -19,9 +19,9 @@ selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-I'm a scientist specializing in statistics and signal processing. As a researcher, I developed data-driven machine learning models to better localize and characterize sound sources. 
-Since working in industry, I've used a variety of data analysis techniques in R and Python to interpret the impacts of underwater construction sound on marine wildlife.
-I really love data-driven epiphanies (those a-ha trends you never expected!) and I'm currently using freeCodeCamp to learn about PostgresSQL and revisit my machine learning background.
+I'm a scientist who uses statistics and signal processing to answer acoustics questions. My research used data-driven machine learning models to localize and characterize sound sources, and
+since working in industry, I use data analysis in R and Python to interpret the impacts of underwater construction sound on marine wildlife.
+I really love data-driven epiphanies and I'm currently using freeCodeCamp to learn about PostgresSQL and machine learning.
 
-Outside of work, I'm a passionate runner - on the road and trails - and a proud cat owner and past foster-parent. And whether I'm running while budgeting or just automating my workflow, I 
+For fun I'm a runner - on the road and trails - and proud cat owner. Whether running while budgeting or automating my workflow, I 
 love finding more efficient ways of getting things done!
