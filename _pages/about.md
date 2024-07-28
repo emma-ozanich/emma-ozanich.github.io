@@ -6,7 +6,7 @@ subtitle: Project Scientist, <a href='https://www.jasco.com'>JASCO Applied Scien
 
 profile:
   align: left
-  image: profile2.jpg
+  image: Ozanich_profile.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
     <p>Denver, Colorado 80033</p>
