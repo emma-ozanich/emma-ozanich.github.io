@@ -21,7 +21,7 @@ social: true  # includes social icons at the bottom of the page
 
 I'm a scientist using statistics and data analysis to answer interesting questions. 
 My research has used machine learning to localize ocean sound, and I'm currently using R and Python to statistically interpret the impacts of underwater construction sound on marine wildlife.
-One thing I love about my work are the rare data-driven epiphanies! 
+I enjoy finding unexpected trends in data!
 
 My goal as a data scientist is to build skills and versatility.
 If you are looking for a scientist who can build, validate, and interpret complex data models and dig into difficult questions -- please send me an email and let's discuss!
