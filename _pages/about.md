@@ -9,7 +9,7 @@ profile:
   image: Ozanich_portrait.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
-    <p>Denver, Colorado 80033</p>
+    <p>Denver metro, Colorado</p>
     <p>emma.ozanich@jasco.com</p>
 
 
