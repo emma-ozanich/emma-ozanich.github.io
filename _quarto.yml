@@ -1,7 +1,17 @@
 project:
   type: website
-  output-dir: ../emma-ozanich.github.io/docs
-
+  output-dir: docs
+website:
+  navbar:
+    background: "#00035b"
+    foreground: light
+    search: true
+    left:
+      - text: "Home"
+        href: about.html
+      - text: "Projects"
+        href: projects.html
+    pinned: true
 toc: true
 number-sections: true
 execute:
