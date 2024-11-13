@@ -1,9 +1,51 @@
 [
   {
-    "objectID": "docs/about.html",
-    "href": "docs/about.html",
-    "title": "about",
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Projects",
     "section": "",
-    "text": "I’m a scientist using statistics and data analysis to answer interesting questions. My research has used machine learning to localize ocean sound, and I’m currently using R and Python to statistically interpret the impacts of underwater construction sound on marine wildlife. I enjoy finding unexpected trends in data!\nMy goal as a data scientist is to build skills and versatility. If you are looking for a scientist who can build, validate, and interpret complex data models and dig into difficult questions – please send me an email and let’s discuss!"
+    "text": "Clustering of coral reef soundscape\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEnvironmental data from NOAA BigQuery\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/1_deep_clustering_coral_reefs.html",
+    "href": "posts/1_deep_clustering_coral_reefs.html",
+    "title": "Clustering of coral reef soundscape",
+    "section": "",
+    "text": "I customized a deep embedded clustering (DEC) algorithm to separate fish calls and whale song in spectrograms of coral reef ambient noise. These data were collected in February to March 2020 by a team including myself."
+  },
+  {
+    "objectID": "posts/1_deep_clustering_coral_reefs.html#data-generation-and-processing",
+    "href": "posts/1_deep_clustering_coral_reefs.html#data-generation-and-processing",
+    "title": "Clustering of coral reef soundscape",
+    "section": "1 Data Generation and Processing",
+    "text": "1 Data Generation and Processing\nFish communicate with series of pulses generated with their swim bladders. We simulate pulses with a Gaussian-modulated sinusoid of N \\in\\lfloor 13 \\times beta(3.5, 8)\\rfloor random pulses and a center frequency f_c based on observations of real fish pulses. The pulses are randomly offset and spaced at a random dt. The random seed and reference phase are fixed, which guarantees we are always generating the same dataset!\n{% raw %}\nrng(seed)\niphase = rd.rand(1)\nfor ii in np.arange(N):\n    ⋮\n    x = x+np.sin(-2*np.pi*(fc*(t-dt*ii-offset)+iphase))*np.exp(-a*(t-dt*ii-offset)**2)\n{% endraw %}\nThe discrete fourier transform (DFT) generates a spectrogram. The image is created by using the magnitude (absolute value). We use the same DFT length for fish calls and whale song, aiming for a happy medium between good time resolution and frequency resolution of both.\n\n&lt;div class=\"col-sm-3 mt-3 mt-md-0\"&gt;\n{% include figure.html path=“/assets/img/Fish_Call_Timeseries.png” class=“img-fluid rounded z-depth-1” %}\n\n&lt;div class=\"col-sm-3 mt-3 mt-md-0\"&gt;\n\\xrightarrow[]{\\text{DFT}}\n\n&lt;div class=\"col-sm-3 mt-3 mt-md-0\"&gt;\n{% include figure.html path=“/assets/img/Fish_Call_Spectrogram.png” class=“img-fluid rounded z-depth-1” %}\n\n\nHumpback whales songs are frequency-modulated sinusoids, also called quadratic sweeps. The length of the sweep T, start frequency f_0, and bandwidth df are based on observed data and previous studies. The call can have an upsweep (df &gt; 0) or a downsweep (df &lt; 0).\n{% raw %}\nrng(seed)\ndelta = (t&gt;offset)*(t&lt;(offset+T))\nx = delta*np.sin(-2*np.pi*(df/(T**2)/3*(t-offset)**3 + f0*(t-offset) + rd.rand(1)))\n{% endraw %}\n\n&lt;div class=\"col-sm-3 mt-3 mt-md-0\"&gt;\n{% include figure.html path=“/assets/img/Whale_Call_Timeseries.png” class=“img-fluid rounded z-depth-1” %}\n\n&lt;div class=\"col-sm-3 mt-3 mt-md-0\"&gt;\n\\xrightarrow[]{\\text{DFT}}\n\n&lt;div class=\"col-sm-3 mt-3 mt-md-0\"&gt;\n{% include figure.html path=“/assets/img/Whale_Call_Spectrogram.png” class=“img-fluid rounded z-depth-1” %}\n\n\nBoth signals are normalized to their maximum, and then Gaussian noise is added with a random signal-to-noise ratio (SNR) using \\sigma.\n{% raw %}\nx = x/np.max(np.abs(x[:]))\nxn = x+sigma*rd.randn(x.shape[-1])\n{% endraw %}\nThe reconstructed images allow us to test the class ratios on the DEC model, and to use transfer learning from the simulated data to real data."
+  },
+  {
+    "objectID": "posts/1_deep_clustering_coral_reefs.html#deep-clustering-model",
+    "href": "posts/1_deep_clustering_coral_reefs.html#deep-clustering-model",
+    "title": "Clustering of coral reef soundscape",
+    "section": "2 Deep clustering model",
+    "text": "2 Deep clustering model\nThe DEC uses a convolutional auto-encoder (CAE) to learn low-dimensional representations of the image – also called kernels. A loss function (L_1) is used to accurately regenerate the input image from these kernels. Then, I retrained the CAE with a clustering penalty (L_2) that encourages grouping of similar kernels.\n{% include figure.html path=“/assets/img/Figure4-1.png” class=“img-fluid rounded z-depth-1” %}\nThe cluster loss selected for this project was the KL is the Kullback-Leibler divergence,\n\nKL(P||Q) = \\sum_n \\sum_k p_{nk} \\log \\left(\\frac{p_{nk}}{q_{nk}} \\right) \n\nq_{nk} is the empirical Student’s t-distribution of the kernel variables around their cluster means, which are initialized with K-means. p_{nk} is the weighted squared distribution of q_{nk}, and it puts more penalty on kernels that are further from their cluster center, causing them to have larger adjustments toward the center during training.\nMore details can be found in our paper:\nE. Ozanich, A. Thode, P. Gerstoft, L. A. Freeman, and S. Freeman, “Deep embedded clustering of coral reef bioacoustics,” J. Acoust. Soc. Am. 149 (2021): 2587–2601.\n{% include jsmath.js %}\n\n&lt;div class=\"col-sm-1 mt-3 mt-md-0\"&gt;\n&lt;/div&gt;\n&lt;div class=\"col-sm-7 mt-3 mt-md-0\"&gt;\n{% include figure.html path=“/assets/img/DEC_recon_example.png” class=“img-fluid rounded z-depth-1” %}\n\n&lt;div class=\"col-sm-1 mt-3 mt-md-0\"&gt;\n&lt;/div&gt;\n\n\nExample simulated fish call, its reconstruction from kernels, and the reconstruction after applying the clustering loss."
+  },
+  {
+    "objectID": "posts/1_deep_clustering_coral_reefs.html#results",
+    "href": "posts/1_deep_clustering_coral_reefs.html#results",
+    "title": "Clustering of coral reef soundscape",
+    "section": "3 Results",
+    "text": "3 Results\nWe look at the results of the DEC method after simulating 100 different datasets. The known labels from the simulations were used to test the model performance.\nThree cases were considered: equal-sized groups (classes) of whale song and fish calls (a-c), inequal-sized classes of whale song and fish call (d-f), and equal-sized clsases of whale song, fish call, and whale song overlaying fish call (g-i). Since we suspect many more fish calls than whale song after observing the experimental data, we test the effect of inequal class size on the model.\n{% include figure.html path=“/assets/img/DEC_simulated.png” class=“img-fluid rounded z-depth-1” %}\nObserving that DEC does not perform well for inequal class sizes, we added the Gaussian mixture means (GMM) method for comparison. GMM was applied directly to the kernels from CAE without additional training of the DEC. The DEC algorithm uses the K-means assumption of equi-distant clusters (fixed-variance Gaussians), whereas GMM learns the variance and the cluster means, allowing it to optimize cluster sizes.\n{% include figure.html path=“/assets/img/DEC_experiment_updated.png” class=“img-fluid rounded z-depth-1” %}\nUsing some hand-labeled events detected in the experiment data, we show that the GMM does perform better than DEC due to the class imbalance in the real data. Unlike curated data, these raw data contain multiple, often overlapping, signals with varying SNR, including unknown signals not accounted for. Additional array processing and human labeling is needed to raise the accuracy from 77% to &gt;90%.\n{% include figure.html path=“/assets/img/messy_classifications.png” class=“img-fluid rounded z-depth-1” %}"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Emma Ozanich’s page",
+    "section": "",
+    "text": "Project Scientist, JASCO Applied Sciences, Inc.\nDenver metro, Colorado\nemma.ozanich@jasco.com\n\nI’m a scientist using statistics and data analysis to answer interesting questions. My research has used machine learning to localize ocean sound, and I’m currently using R and Python to statistically interpret the impacts of underwater construction sound on marine wildlife. I enjoy finding unexpected trends in data!\nMy goal as a data scientist is to build skills and versatility. If you are looking for a scientist who can build, validate, and interpret complex data models and dig into difficult questions – please send me an email and let’s discuss!"
+  },
+  {
+    "objectID": "posts/2_NOAA-BigQuery.html",
+    "href": "posts/2_NOAA-BigQuery.html",
+    "title": "Environmental data from NOAA BigQuery",
+    "section": "",
+    "text": "I created this demo for ECE 228 “Machine Learning for Physical Applications.” It demonstrates how to load, visualize, and analyze data from the NOAA GSOD dataset. In 2023, I’ve added a demo for prediction of seasonal timeseries, using the FFT to find major seasonal cycles, and SARIMAX (seasonal arima model) to predict.\n{::nomarkdown} {% assign jupyter_path = “assets/jupyter/demo.ipynb” | relative_url %} {% capture notebook_exists %}{% file_exists assets/jupyter/demo.ipynb %}{% endcapture %} {% if notebook_exists == “true” %} {% jupyter_notebook jupyter_path %} {% else %}\n\nSorry, the notebook you are looking for does not exist.\n\n{% endif %} {:/nomarkdown}"
   }
 ]
