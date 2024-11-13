@@ -1,0 +1,12 @@
+project:
+  type: website
+  output-dir: ../emma-ozanich.github.io/docs
+
+toc: true
+number-sections: true
+execute:
+  freeze: auto
+  
+format:
+  html:
+    html-math-method: katex
