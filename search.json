@@ -42,6 +42,34 @@
     "text": "Project Scientist, JASCO Applied Sciences, Inc.\nDenver metro, Colorado\nemma.ozanich@jasco.com\n\nI’m a scientist using statistics and data analysis every day in my job. I’ve researched deep learning models to localize ocean sound. Currently, my work uses R and Python to model and interpret the impacts of underwater construction sound on marine wildlife.\nIn the news…\n- Check out my 2024 e-Poster explaining offshore wind farm noise!\n- Find me in Oceanography Career Profiles where I talk about my transition from academia to private industry.\nIf you are looking for a motivated data scientist to interpret data models and dig into difficult questions – send me an email and let’s discuss!"
   },
   {
+    "objectID": "Ozanich_Resume.html",
+    "href": "Ozanich_Resume.html",
+    "title": "Emma Ozanich, PhD",
+    "section": "",
+    "text": "Industry and data scientist with 8 years development and 3 years leadership experience using statistics and machine learning in Python and R."
+  },
+  {
+    "objectID": "Ozanich_Resume.html#education",
+    "href": "Ozanich_Resume.html#education",
+    "title": "Emma Ozanich, PhD",
+    "section": "Education",
+    "text": "Education\nPh.D. Acoustical Oceanography – University of California, San Diego 2017\nM.S. Acoustical Oceanography – University of California, San Diego 2020\nB.S. Physics – Hamline University, St. Paul, Minnesota 2014"
+  },
+  {
+    "objectID": "Ozanich_Resume.html#experience",
+    "href": "Ozanich_Resume.html#experience",
+    "title": "Emma Ozanich, PhD",
+    "section": "Experience",
+    "text": "Experience\n\n\n\n\n\n\n\n\nJASCO Applied Sciences\nProject Scientist, Remote (Denver, CO)\n2022 - Present\n\n\n\n\nLead data analysis development of predictive models and visualizations for environmental data, using Sourcetree/Bitbucket version control\n\nMerge and summarize data tables to visualize key outcomes with R data table, ggplot\nModel linear, nonlinear regression and statistical percentiles for timeseries data\n\n\nCommunicate outcomes and collaborate with external stakeholders to align data science objectives with business goals\n\nServe as technical expert in meetings with cross functional industry and government stakeholders\nAuthor technical memos and reports for publication in public documents\n\n\nCreate software routines to improve data interpretation and efficiency\n\nDeveloped data reporting tools for accelerating large report generation\nCreated interactive Python Panel dashboard for visualizing datasets with seaborn, matplotlib\n\n\n\n\n\n\n\n\n\n\n\nWoods Hole Oceanographic Institution\nPostdoctoral Investigator, Woods Hole, MA\n2021 - 2022\n\n\n\n\nModeled and analyzed ocean timeseries data in MATLAB\n\nUsed large-scale, GPU-accelerated predictive modeling to investigate environmental questions\nCleaned and validated data to remove outliers, sub-sampled and filtered raw timeseries to select signals of interest\n\n\n\n\n\n\n\n\n\n\n\nUniversity of California San Diego\nGraduate Researcher, San Diego, CA\n2016 - 2020\n\n\n\n\nDesigned machine learning models for acoustic sensing in Python Keras and Tensorflow to improve predictive accuracy\n\nUsed deep learning to estimate source angle with over 90% accuracy, robust to random noise\nDeveloped a deep clustering model for coral reef sound datasets using convolutional auto-encoder in Keras and Scikit-Learn\n\nPresented research results at semi-annual conferences and published in reputable acoustics journal\n\n\n\n\n\n\n\n\n\n\nGraduate T.A.\nElectrical and Computer Engineering (ECE 228)\n2019, 2020\n\n\nResearch Mentor\nHaliçioglu Data Science Institute\n2018\n\n\n\n\nCreated and presented Jupyter Notebook demo analyzing BiqQuery timeseries data with SARIMA"
+  },
+  {
+    "objectID": "Ozanich_Resume.html#skills",
+    "href": "Ozanich_Resume.html#skills",
+    "title": "Emma Ozanich, PhD",
+    "section": "Skills",
+    "text": "Skills\n\nLanguages: R, Python/Jupyter Notebook, IDL, pSQL, linux/unix, MATLAB\n\nDevelopment: Sourcetree, Bitbucket, git CLI, familiar with Databricks\n\nReporting: Microsoft Word and Excel (VBA), LaTex, ArcGIS/QGIS"
+  },
+  {
     "objectID": "posts/demo.html",
     "href": "posts/demo.html",
     "title": "Environmental data from NOAA BigQuery",
