@@ -72,6 +72,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-cbde1a370211a6e107ad7b47a0a41c64.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -198,6 +201,7 @@ window.Quarto = {
     <div class="quarto-category">ocean acoustics</div>
     <div class="quarto-category">bioacoustics</div>
     <div class="quarto-category">convolutional autoencoder</div>
+    <div class="quarto-category">unsupervised deep learning</div>
   </div>
   </div>
 
@@ -215,106 +219,119 @@ window.Quarto = {
 </header>
 
 
-<p>I customized a deep embedded clustering (DEC) algorithm to separate fish calls and whale song in spectrograms of coral reef ambient noise. These data were collected in February to March 2020 by a team including myself.</p>
-{% include figure.html path=“/assets/img/reefnoise_long.png” class=“img-fluid rounded z-depth-1” %}
-<div class="caption">
-<pre><code>A time-frequency image, or spectrogram, of about 10 minutes of coral reef noise. Red features are louder, usually representing fish or whale sounds. Blue sections are more quiet.</code></pre>
+<p>I customized a deep embedded clustering (DEC) algorithm to separate fish calls and whale song in spectrograms of coral reef ambient noise (<a href="#fig-reefnoise" class="quarto-xref">Figure&nbsp;1</a>). These data were collected in February to March 2020 near Kona Bay (<a href="#fig-konabay" class="quarto-xref">Figure&nbsp;2</a>) by a team including myself.</p>
+<div id="fig-reefnoise" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-reefnoise-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="..\imgs/reefnoise_long.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: A time-frequency image, or spectrogram, of about 10 minutes of coral reef noise. Red features are louder, usually representing fish or whale sounds. Blue sections are more quiet."><img src="..\imgs/reefnoise_long.png" class="img-fluid figure-img"></a>
 </div>
-<div class="row justify-content-sm-center">
-<pre><code>&lt;div class="col-sm-6 mt-3 mt-md-0"&gt;</code></pre>
-{% include figure.html path=“/assets/img/konabay.jpg” class=“img-fluid rounded z-depth-1” %}
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-reefnoise-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: A time-frequency image, or spectrogram, of about 10 minutes of coral reef noise. Red features are louder, usually representing fish or whale sounds. Blue sections are more quiet.
+</figcaption>
+</figure>
 </div>
-<pre><code>    &lt;div class="col-sm-6 mt-3 mt-md-0"&gt;
-&lt;/div&gt;</code></pre>
-</main></div>
-<div class="caption">
-<pre><code>Photo of Kona Bay near the field site, and a map of Hawai'i.</code></pre>
+<div id="fig-konabay" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-konabay-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\imgs/konabay.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-konabay-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Photo of Kona Bay near the field site.
+</figcaption>
+</figure>
 </div>
 <section id="data-generation-and-processing" class="level2" data-number="1">
-<h2 data-number="1" data-anchor-id="data-generation-and-processing"><span class="header-section-number">1</span> Data Generation and Processing</h2>
-<p>Fish communicate with series of pulses generated with their swim bladders. We simulate pulses with a Gaussian-modulated sinusoid of <em>N</em> <span class="math display">\in\lfloor 13 \times beta(3.5, 8)\rfloor</span> random pulses and a center frequency <span class="math display">f_c</span> based on observations of real fish pulses. The pulses are randomly offset and spaced at a random <em>dt</em>. The random seed and reference phase are fixed, which guarantees we are always generating the same dataset!</p>
-<p>{% raw %}</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>rng(seed)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>iphase <span class="op">=</span> rd.rand(<span class="dv">1</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ii <span class="kw">in</span> np.arange(N):</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    ⋮</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> x<span class="op">+</span>np.sin(<span class="op">-</span><span class="dv">2</span><span class="op">*</span>np.pi<span class="op">*</span>(fc<span class="op">*</span>(t<span class="op">-</span>dt<span class="op">*</span>ii<span class="op">-</span>offset)<span class="op">+</span>iphase))<span class="op">*</span>np.exp(<span class="op">-</span>a<span class="op">*</span>(t<span class="op">-</span>dt<span class="op">*</span>ii<span class="op">-</span>offset)<span class="op">**</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>{% endraw %}</p>
+<h2 data-number="1" class="anchored" data-anchor-id="data-generation-and-processing"><span class="header-section-number">1</span> Data Generation and Processing</h2>
+<p>Fish communicate with series of pulses generated by their swim bladders. We simulate pulses with a Gaussian-modulated sinusoid of <em>N</em> random pulses and a center frequency <span class="math inline">f_c</span> based on observations of real fish pulses. The pulses are randomly offset and spaced at a random <em>dt</em>. The random seed and reference phase are fixed, which guarantees we are always generating the same dataset!</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>rng(seed)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>iphase <span class="op">=</span> rd.rand(<span class="dv">1</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ii <span class="kw">in</span> np.arange(N):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    ⋮</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> x<span class="op">+</span>np.sin(<span class="op">-</span><span class="dv">2</span><span class="op">*</span>np.pi<span class="op">*</span>(fc<span class="op">*</span>(t<span class="op">-</span>dt<span class="op">*</span>ii<span class="op">-</span>offset)<span class="op">+</span>iphase))<span class="op">*</span>np.exp(<span class="op">-</span>a<span class="op">*</span>(t<span class="op">-</span>dt<span class="op">*</span>ii<span class="op">-</span>offset)<span class="op">**</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The discrete fourier transform (DFT) generates a spectrogram. The image is created by using the magnitude (absolute value). We use the same DFT length for fish calls and whale song, aiming for a happy medium between good time resolution and frequency resolution of both.</p>
-<div class="row justify-content-sm-center">
-<pre><code>&lt;div class="col-sm-3 mt-3 mt-md-0"&gt;</code></pre>
-<p>{% include figure.html path=“/assets/img/Fish_Call_Timeseries.png” class=“img-fluid rounded z-depth-1” %}</p>
-</div>
-<pre><code>&lt;div class="col-sm-3 mt-3 mt-md-0"&gt;</code></pre>
-<span class="math display">\xrightarrow[]{\text{DFT}}</span>
-
-<pre><code>&lt;div class="col-sm-3 mt-3 mt-md-0"&gt;</code></pre>
-{% include figure.html path=“/assets/img/Fish_Call_Spectrogram.png” class=“img-fluid rounded z-depth-1” %}
-
-
-<p>Humpback whales songs are frequency-modulated sinusoids, also called quadratic sweeps. The length of the sweep <em>T</em>, start frequency <span class="math display">f_0</span>, and bandwidth <em>df</em> are based on observed data and previous studies. The call can have an upsweep (<em>df</em> &gt; 0) or a downsweep (<em>df</em> &lt; 0).</p>
-<p>{% raw %}</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>rng(seed)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>delta <span class="op">=</span> (t<span class="op">&gt;</span>offset)<span class="op">*</span>(t<span class="op">&lt;</span>(offset<span class="op">+</span>T))</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> delta<span class="op">*</span>np.sin(<span class="op">-</span><span class="dv">2</span><span class="op">*</span>np.pi<span class="op">*</span>(df<span class="op">/</span>(T<span class="op">**</span><span class="dv">2</span>)<span class="op">/</span><span class="dv">3</span><span class="op">*</span>(t<span class="op">-</span>offset)<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> f0<span class="op">*</span>(t<span class="op">-</span>offset) <span class="op">+</span> rd.rand(<span class="dv">1</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>{% endraw %}</p>
-<div class="row justify-content-sm-center">
-<pre><code>&lt;div class="col-sm-3 mt-3 mt-md-0"&gt;</code></pre>
-<p>{% include figure.html path=“/assets/img/Whale_Call_Timeseries.png” class=“img-fluid rounded z-depth-1” %}</p>
-</div>
-<pre><code>&lt;div class="col-sm-3 mt-3 mt-md-0"&gt;</code></pre>
-<span class="math display">\xrightarrow[]{\text{DFT}}</span>
-
-<pre><code>&lt;div class="col-sm-3 mt-3 mt-md-0"&gt;</code></pre>
-{% include figure.html path=“/assets/img/Whale_Call_Spectrogram.png” class=“img-fluid rounded z-depth-1” %}
-
-
-<p>Both signals are normalized to their maximum, and then Gaussian noise is added with a random signal-to-noise ratio (SNR) using <span class="math display">\sigma</span>.</p>
-<p>{% raw %}</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> x<span class="op">/</span>np.<span class="bu">max</span>(np.<span class="bu">abs</span>(x[:]))</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>xn <span class="op">=</span> x<span class="op">+</span>sigma<span class="op">*</span>rd.randn(x.shape[<span class="op">-</span><span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>{% endraw %}</p>
+<p><img src="..\imgs/Fish_Call_Timeseries.png" id="fig-fishTS" class="img-fluid" style="width:40.0%" alt="Timeseries of fish calls."> <span class="math inline">\xrightarrow[]{\text{DFT}}</span> <img src="..\imgs/Fish_Call_Spectrogram.png" id="fig-fishSgram" class="img-fluid" style="width:40.0%" alt="Spectrogram of fish calls."></p>
+<p>Humpback whales songs are frequency-modulated sinusoids, also called quadratic sweeps. The length of the sweep <em>T</em>, start frequency <span class="math inline">f_0</span>, and bandwidth <em>df</em> are based on observed data and previous studies. The call can have an upsweep (<em>df</em> &gt; 0) or a downsweep (<em>df</em> &lt; 0).</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>rng(seed)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>delta <span class="op">=</span> (t<span class="op">&gt;</span>offset)<span class="op">*</span>(t<span class="op">&lt;</span>(offset<span class="op">+</span>T))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> delta<span class="op">*</span>np.sin(<span class="op">-</span><span class="dv">2</span><span class="op">*</span>np.pi<span class="op">*</span>(df<span class="op">/</span>(T<span class="op">**</span><span class="dv">2</span>)<span class="op">/</span><span class="dv">3</span><span class="op">*</span>(t<span class="op">-</span>offset)<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> f0<span class="op">*</span>(t<span class="op">-</span>offset) <span class="op">+</span> rd.rand(<span class="dv">1</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="..\imgs/Whale_Call_Timeseries.png" id="fig-whaleTS" class="img-fluid" style="width:40.0%"> <span class="math inline">\xrightarrow[]{\text{DFT}}</span> <img src="..\imgs/Whale_Call_Spectrogram.png" id="fig-whaleSgram" class="img-fluid" style="width:40.0%"></p>
+<p>Both signals are normalized to their maximum, and then Gaussian noise is added with a random signal-to-noise ratio (SNR) using <span class="math inline">\sigma</span>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> x<span class="op">/</span>np.<span class="bu">max</span>(np.<span class="bu">abs</span>(x[:]))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>xn <span class="op">=</span> x<span class="op">+</span>sigma<span class="op">*</span>rd.randn(x.shape[<span class="op">-</span><span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The reconstructed images allow us to test the class ratios on the DEC model, and to use transfer learning from the simulated data to real data.</p>
 </section>
 <section id="deep-clustering-model" class="level2" data-number="2">
-<h2 data-number="2" data-anchor-id="deep-clustering-model"><span class="header-section-number">2</span> Deep clustering model</h2>
-<p>The DEC uses a convolutional auto-encoder (CAE) to learn low-dimensional representations of the image – also called kernels. A loss function (<span class="math display">L_1</span>) is used to accurately regenerate the input image from these kernels. Then, I retrained the CAE with a clustering penalty (<span class="math display">L_2</span>) that encourages grouping of similar kernels.</p>
-<p>{% include figure.html path=“/assets/img/Figure4-1.png” class=“img-fluid rounded z-depth-1” %}</p>
+<h2 data-number="2" class="anchored" data-anchor-id="deep-clustering-model"><span class="header-section-number">2</span> Deep clustering model</h2>
+<p>The DEC uses a convolutional auto-encoder (CAE, see <a href="#fig-DEC" class="quarto-xref">Figure&nbsp;3</a>) to learn low-dimensional representations of the image, also called kernels. A loss function (<span class="math inline">L_1</span>) is used to accurately regenerate the input image from these kernels. Then, I retrained the CAE with a clustering penalty (<span class="math inline">L_2</span>) that encourages grouping of similar kernels.</p>
+<div id="fig-DEC" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-DEC-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="..\imgs/Figure4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;3: A diagram of the deep clustering model workflow and layer sizes."><img src="..\imgs/Figure4-1.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-DEC-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: A diagram of the deep clustering model workflow and layer sizes.
+</figcaption>
+</figure>
+</div>
 <p>The cluster loss selected for this project was the <em>KL</em> is the Kullback-Leibler divergence,</p>
 <p align="center">
 <span class="math display">KL(P||Q) = \sum_n \sum_k p_{nk} \log \left(\frac{p_{nk}}{q_{nk}} \right) </span>
 </p>
-<p><span class="math display">q_{nk}</span> is the empirical Student’s t-distribution of the kernel variables around their cluster means, which are initialized with K-means. <span class="math display">p_{nk}</span> is the weighted squared distribution of <span class="math display">q_{nk}</span>, and it puts more penalty on kernels that are further from their cluster center, causing them to have larger adjustments toward the center during training.</p>
+<p><span class="math inline">q_{nk}</span> is the empirical Student’s t-distribution of the kernel variables around their cluster means, which are initialized with K-means. <span class="math inline">p_{nk}</span> is the weighted squared distribution of <span class="math inline">q_{nk}</span>, and it puts more penalty on kernels that are further from their cluster center, causing them to have larger adjustments toward the center during training.</p>
 <p>More details can be found in our paper:</p>
 <p>E. Ozanich, A. Thode, P. Gerstoft, L. A. Freeman, and S. Freeman, “Deep embedded clustering of coral reef bioacoustics,” <em>J. Acoust. Soc. Am. 149</em> (2021): 2587–2601.</p>
-<p>{% include jsmath.js %}</p>
-<div class="row justify-content-sm-center">
-<pre><code>&lt;div class="col-sm-1 mt-3 mt-md-0"&gt;
-&lt;/div&gt;
-&lt;div class="col-sm-7 mt-3 mt-md-0"&gt;</code></pre>
-<p>{% include figure.html path=“/assets/img/DEC_recon_example.png” class=“img-fluid rounded z-depth-1” %}</p>
+<div id="fig-DECrecon" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-DECrecon-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\imgs/DEC_recon_example.png" class="img-fluid figure-img" style="width:75.0%">
 </div>
-<pre><code>&lt;div class="col-sm-1 mt-3 mt-md-0"&gt;
-&lt;/div&gt;</code></pre>
-
-<div class="caption">
-<p>Example simulated fish call, its reconstruction from kernels, and the reconstruction after applying the clustering loss.</p>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-DECrecon-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Example simulated fish call, its reconstruction from kernels, and the reconstruction after applying clustering.
+</figcaption>
+</figure>
 </div>
 </section>
 <section id="results" class="level2" data-number="3">
-<h2 data-number="3" data-anchor-id="results"><span class="header-section-number">3</span> Results</h2>
+<h2 data-number="3" class="anchored" data-anchor-id="results"><span class="header-section-number">3</span> Results</h2>
 <p>We look at the results of the DEC method after simulating 100 different datasets. The known labels from the simulations were used to test the model performance.</p>
 <p>Three cases were considered: equal-sized groups (classes) of whale song and fish calls <strong>(a-c)</strong>, inequal-sized classes of whale song and fish call <strong>(d-f)</strong>, and equal-sized clsases of whale song, fish call, and whale song overlaying fish call <strong>(g-i)</strong>. Since we suspect many more fish calls than whale song after observing the experimental data, we test the effect of inequal class size on the model.</p>
-<p>{% include figure.html path=“/assets/img/DEC_simulated.png” class=“img-fluid rounded z-depth-1” %}</p>
+<div id="fig-DECsim" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-DECsim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\imgs/DEC_simulated.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-DECsim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: t-SNE visualization of clustering performance for simulated data using (a-c) two equally sized classes, (d-f) two imbalanced classes, and (g-i) three classes, using manual labeling, Gaussian mixture models on the latent features, or the DEC pipeline.
+</figcaption>
+</figure>
+</div>
 <p>Observing that DEC does not perform well for inequal class sizes, we added the Gaussian mixture means (GMM) method for comparison. GMM was applied directly to the kernels from CAE without additional training of the DEC. The DEC algorithm uses the K-means assumption of equi-distant clusters (fixed-variance Gaussians), whereas GMM learns the variance and the cluster means, allowing it to optimize cluster sizes.</p>
-<p>{% include figure.html path=“/assets/img/DEC_experiment_updated.png” class=“img-fluid rounded z-depth-1” %}</p>
+<div id="fig-DECupdated" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-DECupdated-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\imgs/DEC_experiment_updated.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-DECupdated-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: t-SNE visualization of clustering performance for real coral reef data using (a) manual labels, (b) k-means clustering, (c) Gaussian mixture models, and (d) the DEC pipeline.
+</figcaption>
+</figure>
+</div>
 <p>Using some hand-labeled events detected in the experiment data, we show that the GMM does perform better than DEC due to the class imbalance in the real data. Unlike curated data, these raw data contain multiple, often overlapping, signals with varying SNR, including unknown signals not accounted for. Additional array processing and human labeling is needed to raise the accuracy from 77% to &gt;90%.</p>
-<p>{% include figure.html path=“/assets/img/messy_classifications.png” class=“img-fluid rounded z-depth-1” %}</p>
+<div id="fig-classify" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-classify-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\imgs/messy_classifications.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-classify-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Examples of real coral reef spectrograms used as inputs for the CNN and DEC feature extraction and clustering pipeline.
+</figcaption>
+</figure>
+</div>
 
 
 </section>
 
- <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -407,7 +424,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/emma-ozanich\.github\.io\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -735,7 +752,39 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
- <!-- /content -->
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
