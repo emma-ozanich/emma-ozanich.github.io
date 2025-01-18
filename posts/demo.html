@@ -145,11 +145,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#include-packages" id="toc-include-packages" class="nav-link active" data-scroll-target="#include-packages"><span class="header-section-number">1</span> Include packages</a></li>
   <li><a href="#load-the-data" id="toc-load-the-data" class="nav-link" data-scroll-target="#load-the-data"><span class="header-section-number">2</span> Load the data</a></li>
-  <li><a href="#merge-environmental-data-and-station-data." id="toc-merge-environmental-data-and-station-data." class="nav-link" data-scroll-target="#merge-environmental-data-and-station-data."><span class="header-section-number">3</span> Merge environmental data and station data.</a></li>
+  <li><a href="#merge-different-datasets" id="toc-merge-different-datasets" class="nav-link" data-scroll-target="#merge-different-datasets"><span class="header-section-number">3</span> Merge different datasets</a></li>
   <li><a href="#select-a-random-station-red-on-map." id="toc-select-a-random-station-red-on-map." class="nav-link" data-scroll-target="#select-a-random-station-red-on-map."><span class="header-section-number">4</span> Select a random station (red + on map).</a></li>
-  <li><a href="#plot-the-daily-and-weekly-temperature-timeseries" id="toc-plot-the-daily-and-weekly-temperature-timeseries" class="nav-link" data-scroll-target="#plot-the-daily-and-weekly-temperature-timeseries"><span class="header-section-number">5</span> Plot the daily and weekly temperature timeseries</a></li>
-  <li><a href="#find-the-seasonality-of-temperature-using-an-fft." id="toc-find-the-seasonality-of-temperature-using-an-fft." class="nav-link" data-scroll-target="#find-the-seasonality-of-temperature-using-an-fft."><span class="header-section-number">6</span> Find the seasonality of temperature using an fft.</a></li>
-  <li><a href="#train-a-sarimax-model-on-weekly-temperature-before-2018.-predict-100-days-past-2017." id="toc-train-a-sarimax-model-on-weekly-temperature-before-2018.-predict-100-days-past-2017." class="nav-link" data-scroll-target="#train-a-sarimax-model-on-weekly-temperature-before-2018.-predict-100-days-past-2017."><span class="header-section-number">7</span> Train a SARIMAX model on weekly temperature before 2018. Predict 100 days past 2017.</a></li>
+  <li><a href="#plot-temperature-timeseries" id="toc-plot-temperature-timeseries" class="nav-link" data-scroll-target="#plot-temperature-timeseries"><span class="header-section-number">5</span> Plot temperature timeseries</a></li>
+  <li><a href="#find-the-temperature-seasonality" id="toc-find-the-temperature-seasonality" class="nav-link" data-scroll-target="#find-the-temperature-seasonality"><span class="header-section-number">6</span> Find the temperature seasonality</a></li>
+  <li><a href="#train-a-sarimax-model-on-weekly-temperature" id="toc-train-a-sarimax-model-on-weekly-temperature" class="nav-link" data-scroll-target="#train-a-sarimax-model-on-weekly-temperature"><span class="header-section-number">7</span> Train a SARIMAX model on weekly temperature</a></li>
   </ul>
 </nav>
     </div>
@@ -246,8 +246,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <p>:::</p>
 </section>
-<section id="merge-environmental-data-and-station-data." class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="merge-environmental-data-and-station-data."><span class="header-section-number">3</span> Merge environmental data and station data.</h2>
+<section id="merge-different-datasets" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="merge-different-datasets"><span class="header-section-number">3</span> Merge different datasets</h2>
 <div id="cell-8" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
@@ -312,8 +312,8 @@ Figure&nbsp;1: A map using a cylindrical projection and showing all stations wit
 </div>
 </div>
 </section>
-<section id="plot-the-daily-and-weekly-temperature-timeseries" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="plot-the-daily-and-weekly-temperature-timeseries"><span class="header-section-number">5</span> Plot the daily and weekly temperature timeseries</h2>
+<section id="plot-temperature-timeseries" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="plot-temperature-timeseries"><span class="header-section-number">5</span> Plot temperature timeseries</h2>
 <div id="cell-timeseries" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
@@ -352,8 +352,8 @@ Figure&nbsp;1: A map using a cylindrical projection and showing all stations wit
 </div>
 </div>
 </section>
-<section id="find-the-seasonality-of-temperature-using-an-fft." class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="find-the-seasonality-of-temperature-using-an-fft."><span class="header-section-number">6</span> Find the seasonality of temperature using an fft.</h2>
+<section id="find-the-temperature-seasonality" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="find-the-temperature-seasonality"><span class="header-section-number">6</span> Find the temperature seasonality</h2>
 <div id="cell-spectrum" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
@@ -388,8 +388,8 @@ Figure&nbsp;1: A map using a cylindrical projection and showing all stations wit
 </div>
 </div>
 </section>
-<section id="train-a-sarimax-model-on-weekly-temperature-before-2018.-predict-100-days-past-2017." class="level2" data-number="7">
-<h2 data-number="7" class="anchored" data-anchor-id="train-a-sarimax-model-on-weekly-temperature-before-2018.-predict-100-days-past-2017."><span class="header-section-number">7</span> Train a SARIMAX model on weekly temperature before 2018. Predict 100 days past 2017.</h2>
+<section id="train-a-sarimax-model-on-weekly-temperature" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="train-a-sarimax-model-on-weekly-temperature"><span class="header-section-number">7</span> Train a SARIMAX model on weekly temperature</h2>
 <div id="cell-SARIMAX" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
