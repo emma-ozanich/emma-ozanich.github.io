@@ -180,40 +180,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>I created this demo for ECE 228 “Machine Learning for Physical Applications.” It demonstrates how to load, visualize, and analyze data from the NOAA GSOD dataset.</p>
-<p>In 2023, I’ve added a demo for prediction of seasonal timeseries, using the FFT to find major seasonal cycles, and SARIMAX (seasonal arima model) to predict. This notebook loads and visualizes data from the NOAA GSOD dataset into Pandas dataframe (2014 to 2018, access via BiqQuery API: https://cloud.google.com/bigquery/public-data/)</p>
+<p>I’ve added a demo for prediction of seasonal timeseries, using the FFT to find major seasonal cycles, and SARIMAX (seasonal arima model) to predict. This notebook loads and visualizes data from the NOAA GSOD dataset into Pandas dataframe (2014 to 2018, access via BiqQuery API: https://cloud.google.com/bigquery/public-data/)</p>
 <section id="include-packages" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="include-packages"><span class="header-section-number">1</span> Include packages</h2>
-<p>::: {#cell-3 .cell _cell_guid=‘33b007c6-36fb-4b88-8bff-8085eca9423a’ _uuid=‘de9f2f376e9b6436d459e42eaffafec02d1c88eb’ execution_count=1}</p>
+<p>::: {#cell-3 .cell _cell_guid=‘33b007c6-36fb-4b88-8bff-8085eca9423a’ _uuid=‘de9f2f376e9b6436d459e42eaffafec02d1c88eb’ execution_count=14}</p>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pandas.tseries.offsets <span class="im">import</span> DateOffset</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> glob</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mpl_toolkits.basemap <span class="im">import</span> Basemap</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">"ignore"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pandas.tseries.offsets <span class="im">import</span> DateOffset</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib </span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.signal <span class="im">as</span> sig</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#signalprocessing</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.fftpack <span class="im">import</span> fft, ifft, fftfreq</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sma</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.tsa.statespace.api <span class="im">as</span> sm</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.tsa.stattools <span class="im">import</span> adfuller</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy.random <span class="im">import</span> randint</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.dates <span class="im">as</span> mdates</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> glob</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mpl_toolkits.basemap <span class="im">import</span> Basemap</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.signal <span class="im">as</span> sig</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#signalprocessing</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.fftpack <span class="im">import</span> fft, ifft, fftfreq</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sma</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.tsa.statespace.api <span class="im">as</span> sm</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.tsa.stattools <span class="im">import</span> adfuller</span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">#print(pd.__version__)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy.random <span class="im">import</span> randint</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.dates <span class="im">as</span> mdates</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">#print(pd.__version__)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>C:\Users\emmar\Anaconda3\envs\NOAA_BigQuery\lib\site-packages\pyproj\__init__.py:73: UserWarning: Valid PROJ data directory not found. Either set the path using the environmental variable PROJ_LIB or with `pyproj.datadir.set_data_dir`.
-  warnings.warn(str(err))</code></pre>
-</div>
 <p>:::</p>
 </section>
 <section id="load-the-data" class="level2" data-number="2">
@@ -222,79 +221,79 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>::: {#cell-6 .cell _cell_guid=‘b2b5f66a-623f-49cc-b077-708dd3be5eaa’ _uuid=‘03a4417ddc3a6cd00e4d32d0687b05d7b24ef773’ execution_count=2}</p>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dataset_path<span class="op">=</span><span class="st">'datasets/NOAA_SST/'</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fpath <span class="op">=</span> dataset_path <span class="co">#+ 'noaa_gsod/'</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>pandas_files <span class="op">=</span> <span class="bu">sorted</span>(glob.glob(fpath <span class="op">+</span> <span class="st">'noaa_gsod.gsod*'</span>))</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>pandas_files <span class="op">=</span> pandas_files[<span class="op">-</span><span class="dv">5</span>:]  <span class="co"># Take the last five years</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>stations <span class="op">=</span> pd.read_pickle(dataset_path<span class="op">+</span><span class="st">'noaa_gsod.stations'</span>) <span class="co"># load station data</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>stations <span class="op">=</span> stations[stations[<span class="st">'begin'</span>].astype(<span class="bu">int</span>)<span class="op">&gt;</span><span class="dv">20140101</span>] <span class="co"># station data for the past 5 years</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, fi <span class="kw">in</span> <span class="bu">enumerate</span>(pandas_files):</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    dtmp <span class="op">=</span> pd.read_pickle(fi)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># read year from the filename and add as a column</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    yr <span class="op">=</span> <span class="bu">int</span>(fi[<span class="op">-</span><span class="dv">4</span>:]) </span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    dtmp[<span class="st">'yr'</span>] <span class="op">=</span> yr<span class="op">*</span>np.ones(<span class="bu">len</span>(dtmp),).astype(<span class="bu">int</span>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create a datetime column, makes plotting timeseries easier</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    dtmp[<span class="st">'Datetime'</span>] <span class="op">=</span> pd.to_datetime((dtmp[<span class="st">'yr'</span>].astype(<span class="bu">str</span>) <span class="op">+</span> dtmp[<span class="st">'mo'</span>].astype(<span class="bu">str</span>) <span class="op">+</span> dtmp[<span class="st">'da'</span>].astype(<span class="bu">str</span>)),<span class="op">\</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>                                       <span class="bu">format</span><span class="op">=</span><span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">'</span>)</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># stick the years together</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.concat([df, dtmp], ignore_index<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dataset_path<span class="op">=</span><span class="st">'datasets/NOAA_SST/'</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>fpath <span class="op">=</span> dataset_path <span class="co">#+ 'noaa_gsod/'</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>pandas_files <span class="op">=</span> <span class="bu">sorted</span>(glob.glob(fpath <span class="op">+</span> <span class="st">'noaa_gsod.gsod*'</span>))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>pandas_files <span class="op">=</span> pandas_files[<span class="op">-</span><span class="dv">5</span>:]  <span class="co"># Take the last five years</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>stations <span class="op">=</span> pd.read_pickle(dataset_path<span class="op">+</span><span class="st">'noaa_gsod.stations'</span>) <span class="co"># load station data</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>stations <span class="op">=</span> stations[stations[<span class="st">'begin'</span>].astype(<span class="bu">int</span>)<span class="op">&gt;</span><span class="dv">20140101</span>] <span class="co"># station data for the past 5 years</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, fi <span class="kw">in</span> <span class="bu">enumerate</span>(pandas_files):</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    dtmp <span class="op">=</span> pd.read_pickle(fi)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># read year from the filename and add as a column</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    yr <span class="op">=</span> <span class="bu">int</span>(fi[<span class="op">-</span><span class="dv">4</span>:]) </span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    dtmp[<span class="st">'yr'</span>] <span class="op">=</span> yr<span class="op">*</span>np.ones(<span class="bu">len</span>(dtmp),).astype(<span class="bu">int</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create a datetime column, makes plotting timeseries easier</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    dtmp[<span class="st">'Datetime'</span>] <span class="op">=</span> pd.to_datetime((dtmp[<span class="st">'yr'</span>].astype(<span class="bu">str</span>) <span class="op">+</span> dtmp[<span class="st">'mo'</span>].astype(<span class="bu">str</span>) <span class="op">+</span> dtmp[<span class="st">'da'</span>].astype(<span class="bu">str</span>)),<span class="op">\</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>                                       <span class="bu">format</span><span class="op">=</span><span class="st">'%Y%m</span><span class="sc">%d</span><span class="st">'</span>)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># stick the years together</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.concat([df, dtmp], ignore_index<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <p>:::</p>
 </section>
 <section id="merge-environmental-data-and-station-data." class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="merge-environmental-data-and-station-data."><span class="header-section-number">3</span> Merge environmental data and station data.</h2>
-<div id="cell-8" class="cell">
+<div id="cell-8" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_all <span class="op">=</span> df.merge(stations, left_on<span class="op">=</span><span class="st">'stn'</span>,right_on<span class="op">=</span><span class="st">'usaf'</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df_all <span class="op">=</span> df_all[df_all[<span class="st">'lon'</span>].notna()]</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>df_all <span class="op">=</span> df_all.set_index(<span class="st">'Datetime'</span>, drop<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df_all <span class="op">=</span> df.merge(stations, left_on<span class="op">=</span><span class="st">'stn'</span>,right_on<span class="op">=</span><span class="st">'usaf'</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df_all <span class="op">=</span> df_all[df_all[<span class="st">'lon'</span>].notna()]</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>df_all <span class="op">=</span> df_all.set_index(<span class="st">'Datetime'</span>, drop<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
 <section id="select-a-random-station-red-on-map." class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="select-a-random-station-red-on-map."><span class="header-section-number">4</span> Select a random station (red + on map).</h2>
-<div id="cell-fig-map" class="cell" data-execution_count="3">
+<div id="cell-fig-map" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">33</span>) <span class="co"># set the seed to show the same example every time for the demo</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>rs <span class="op">=</span> np.unique(df_all[<span class="st">'stn'</span>].values) <span class="co"># find unique stations with data</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>rand_stat <span class="op">=</span> rs[randint(<span class="bu">len</span>(rs))] <span class="co"># pick a random station</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> df_all.loc[df_all[<span class="st">'stn'</span>] <span class="op">==</span> rand_stat] <span class="co"># pick weather at random station</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> features.drop(columns<span class="op">=</span>[<span class="st">'stn'</span>,<span class="st">'max'</span>,<span class="st">'min'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> features.sort_index()</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># View station locations</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="fl">18.5</span>, <span class="fl">10.5</span>))</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> Basemap(projection<span class="op">=</span><span class="st">'cyl'</span>,llcrnrlat<span class="op">=-</span><span class="dv">90</span>,urcrnrlat<span class="op">=</span><span class="dv">90</span>,<span class="op">\</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>            llcrnrlon<span class="op">=-</span><span class="dv">180</span>,urcrnrlon<span class="op">=</span><span class="dv">180</span>, resolution<span class="op">=</span><span class="st">'l'</span>)</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Make map look pretty</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>m.drawmapboundary(fill_color<span class="op">=</span><span class="st">'xkcd:lightblue'</span>)</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>m.fillcontinents(color<span class="op">=</span><span class="st">'xkcd:green'</span>,lake_color<span class="op">=</span><span class="st">'xkcd:lightblue'</span>)</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>m.drawmeridians(np.arange(<span class="fl">0.</span>,<span class="fl">350.</span>,<span class="fl">30.</span>),labels<span class="op">=</span>[<span class="va">True</span>,<span class="va">False</span>,<span class="va">False</span>,<span class="va">True</span>])</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>m.drawparallels(np.arange(<span class="op">-</span><span class="fl">90.</span>,<span class="dv">90</span>,<span class="fl">30.</span>),labels<span class="op">=</span>[<span class="va">False</span>,<span class="va">True</span>,<span class="va">True</span>,<span class="va">False</span>])</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the stations with blue plusses</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>lon <span class="op">=</span> df_all[<span class="st">'lon'</span>].tolist()</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>lat <span class="op">=</span> df_all[<span class="st">'lat'</span>].tolist()</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>xpt,ypt <span class="op">=</span> m(lon,lat)</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>m.plot(xpt,ypt,<span class="st">'b+'</span>) </span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the position of the station</span></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Station ID: '</span>, rand_stat, <span class="st">'. Number of samples: '</span>, <span class="bu">len</span>(df_all.loc[df_all[<span class="st">'stn'</span>]<span class="op">==</span>rand_stat]))</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>lon <span class="op">=</span> features[<span class="st">'lon'</span>].tolist()</span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>lat <span class="op">=</span> features[<span class="st">'lat'</span>].tolist()</span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>m.plot(lon, lat,<span class="st">'r+'</span>) </span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">33</span>) <span class="co"># set the seed to show the same example every time for the demo</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>rs <span class="op">=</span> np.unique(df_all[<span class="st">'stn'</span>].values) <span class="co"># find unique stations with data</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>rand_stat <span class="op">=</span> rs[randint(<span class="bu">len</span>(rs))] <span class="co"># pick a random station</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> df_all.loc[df_all[<span class="st">'stn'</span>] <span class="op">==</span> rand_stat] <span class="co"># pick weather at random station</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> features.drop(columns<span class="op">=</span>[<span class="st">'stn'</span>,<span class="st">'max'</span>,<span class="st">'min'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> features.sort_index()</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># View station locations</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="fl">18.5</span>, <span class="fl">10.5</span>))</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> Basemap(projection<span class="op">=</span><span class="st">'cyl'</span>,llcrnrlat<span class="op">=-</span><span class="dv">90</span>,urcrnrlat<span class="op">=</span><span class="dv">90</span>,<span class="op">\</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>            llcrnrlon<span class="op">=-</span><span class="dv">180</span>,urcrnrlon<span class="op">=</span><span class="dv">180</span>, resolution<span class="op">=</span><span class="st">'l'</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Make map look pretty</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>m.drawmapboundary(fill_color<span class="op">=</span><span class="st">'xkcd:lightblue'</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>m.fillcontinents(color<span class="op">=</span><span class="st">'xkcd:green'</span>,lake_color<span class="op">=</span><span class="st">'xkcd:lightblue'</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>m.drawmeridians(np.arange(<span class="fl">0.</span>,<span class="fl">350.</span>,<span class="fl">30.</span>),labels<span class="op">=</span>[<span class="va">True</span>,<span class="va">False</span>,<span class="va">False</span>,<span class="va">True</span>])</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>m.drawparallels(np.arange(<span class="op">-</span><span class="fl">90.</span>,<span class="dv">90</span>,<span class="fl">30.</span>),labels<span class="op">=</span>[<span class="va">False</span>,<span class="va">True</span>,<span class="va">True</span>,<span class="va">False</span>])</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the stations with blue plusses</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>lon <span class="op">=</span> df_all[<span class="st">'lon'</span>].tolist()</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>lat <span class="op">=</span> df_all[<span class="st">'lat'</span>].tolist()</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>xpt,ypt <span class="op">=</span> m(lon,lat)</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>m.plot(xpt,ypt,<span class="st">'b+'</span>) </span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the position of the station</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Station ID: '</span>, rand_stat, <span class="st">'. Number of samples: '</span>, <span class="bu">len</span>(df_all.loc[df_all[<span class="st">'stn'</span>]<span class="op">==</span>rand_stat]))</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>lon <span class="op">=</span> features[<span class="st">'lon'</span>].tolist()</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>lat <span class="op">=</span> features[<span class="st">'lat'</span>].tolist()</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>m.plot(lon, lat,<span class="st">'r+'</span>,markersize<span class="op">=</span>) </span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Station ID:  066900 . Number of samples:  1786</code></pre>
@@ -315,33 +314,33 @@ Figure&nbsp;1: A map using a cylindrical projection and showing all stations wit
 </section>
 <section id="plot-the-daily-and-weekly-temperature-timeseries" class="level2" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="plot-the-daily-and-weekly-temperature-timeseries"><span class="header-section-number">5</span> Plot the daily and weekly temperature timeseries</h2>
-<div id="cell-timeseries" class="cell" data-execution_count="22">
+<div id="cell-timeseries" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> features[<span class="st">'temp'</span>].values</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>xmean <span class="op">=</span> np.mean(x)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the mean for processing</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> x <span class="op">-</span> xmean</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="bu">len</span>(y)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>downsamp <span class="op">=</span> <span class="dv">7</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>yt <span class="op">=</span> sig.decimate(y, downsamp)</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>tst <span class="op">=</span> features.index[::downsamp]</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if it's stationary! (it's not)</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#test = adfuller(y)</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">#print(["It's stationary" if test[1]&lt;0.05 else "It's not stationary"])</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>fig<span class="op">=</span>plt.figure()</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">#ax.scatter(features.index, x)</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>ax.plot(features.index, x, marker<span class="op">=</span><span class="st">'o'</span>)</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>ax.plot(tst, yt<span class="op">+</span>xmean, zorder<span class="op">=</span><span class="dv">3</span>, marker<span class="op">=</span><span class="st">'o'</span>,color<span class="op">=</span><span class="st">'r'</span>,markersize<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>ax.xaxis.set_major_formatter(mdates.DateFormatter(<span class="st">'%Y-%m-</span><span class="sc">%d</span><span class="st">'</span>))</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>fig.autofmt_xdate()</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>plt.legend([<span class="st">'Daily temperature'</span>,<span class="st">'Weekly temperature'</span>])</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Temperature ($^\circ$C)'</span>)</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> features[<span class="st">'temp'</span>].values</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>xmean <span class="op">=</span> np.mean(x)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the mean for processing</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> x <span class="op">-</span> xmean</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="bu">len</span>(y)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>downsamp <span class="op">=</span> <span class="dv">7</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>yt <span class="op">=</span> sig.decimate(y, downsamp)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>tst <span class="op">=</span> features.index[::downsamp]</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if it's stationary! (it's not)</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#test = adfuller(y)</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#print(["It's stationary" if test[1]&lt;0.05 else "It's not stationary"])</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>fig<span class="op">=</span>plt.figure()</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">#ax.scatter(features.index, x)</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>ax.plot(features.index, x, marker<span class="op">=</span><span class="st">'o'</span>)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>ax.plot(tst, yt<span class="op">+</span>xmean, zorder<span class="op">=</span><span class="dv">3</span>, marker<span class="op">=</span><span class="st">'o'</span>,color<span class="op">=</span><span class="st">'r'</span>,markersize<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>ax.xaxis.set_major_formatter(mdates.DateFormatter(<span class="st">'%Y-%m-</span><span class="sc">%d</span><span class="st">'</span>))</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>fig.autofmt_xdate()</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>plt.legend([<span class="st">'Daily temperature'</span>,<span class="st">'Weekly temperature'</span>])</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Temperature ($^\circ$C)'</span>)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="timeseries" class="quarto-figure quarto-figure-center anchored">
@@ -355,37 +354,34 @@ Figure&nbsp;1: A map using a cylindrical projection and showing all stations wit
 </section>
 <section id="find-the-seasonality-of-temperature-using-an-fft." class="level2" data-number="6">
 <h2 data-number="6" class="anchored" data-anchor-id="find-the-seasonality-of-temperature-using-an-fft."><span class="header-section-number">6</span> Find the seasonality of temperature using an fft.</h2>
-<div id="cell-spectrum" class="cell" data-execution_count="29">
+<div id="cell-spectrum" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Nfft <span class="op">=</span> <span class="bu">int</span>( <span class="dv">2</span><span class="op">**</span>(np.ceil(np.log2(N))) )</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>freq <span class="op">=</span> fftfreq(Nfft)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>n_oneside <span class="op">=</span> Nfft<span class="op">//</span><span class="dv">2</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>t_d <span class="op">=</span> <span class="dv">1</span><span class="op">/</span>freq[:n_oneside] </span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>seasonality <span class="op">=</span> np.<span class="bu">abs</span>(fft(y))</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># find peak frequency</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>pkfreq, props <span class="op">=</span> sig.find_peaks(seasonality[:n_oneside], prominence<span class="op">=</span><span class="dv">5000</span>)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>plt.plot(freq[:n_oneside], seasonality[:n_oneside], <span class="st">'b'</span>)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>plt.stem([<span class="dv">1</span><span class="op">/</span>(<span class="dv">365</span><span class="op">*</span><span class="dv">2</span>),<span class="dv">2</span><span class="op">/</span><span class="dv">365</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">365</span>], <span class="dv">5000</span><span class="op">*</span>np.ones((<span class="dv">3</span>,)), <span class="st">'r'</span>)</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>plt.scatter(freq[pkfreq[<span class="dv">0</span>]], seasonality[pkfreq[<span class="dv">0</span>]])</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Frequency (1/days)'</span>)</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>plt.xlim([<span class="dv">0</span>,<span class="fl">0.05</span>])</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>plt.legend([<span class="st">'Seasonality (cycles per day)'</span>,<span class="st">'Peak: '</span> <span class="op">+</span> <span class="bu">str</span>(<span class="bu">int</span>(<span class="dv">1</span><span class="op">/</span>freq[pkfreq[<span class="dv">0</span>]])) <span class="op">+</span> <span class="st">' days'</span>,<span class="st">'Biannual/Annual/SemiPeriodicity'</span>])</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>ts <span class="op">=</span> features.index</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Nfft <span class="op">=</span> <span class="bu">int</span>( <span class="dv">2</span><span class="op">**</span>(np.ceil(np.log2(N))) )</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>freq <span class="op">=</span> fftfreq(Nfft)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>freq[freq<span class="op">==</span><span class="dv">0</span>] <span class="op">=</span> freq[freq<span class="op">==</span><span class="dv">0</span>] <span class="op">+</span> <span class="fl">0.0001</span> <span class="co"># avoid divide-by-zero</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>n_oneside <span class="op">=</span> Nfft<span class="op">//</span><span class="dv">2</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>t_d <span class="op">=</span> <span class="dv">1</span><span class="op">/</span>freq[:n_oneside] </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>seasonality <span class="op">=</span> np.<span class="bu">abs</span>(fft(y))</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># find peak frequency</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>pkfreq, props <span class="op">=</span> sig.find_peaks(seasonality[:n_oneside], prominence<span class="op">=</span><span class="dv">5000</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>plt.plot(freq[:n_oneside], seasonality[:n_oneside], <span class="st">'b'</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>plt.stem([<span class="dv">1</span><span class="op">/</span>(<span class="dv">365</span><span class="op">*</span><span class="dv">2</span>),<span class="dv">2</span><span class="op">/</span><span class="dv">365</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">365</span>], <span class="dv">5000</span><span class="op">*</span>np.ones((<span class="dv">3</span>,)), <span class="st">'r'</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>plt.scatter(freq[pkfreq[<span class="dv">0</span>]], seasonality[pkfreq[<span class="dv">0</span>]])</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Frequency (1/days)'</span>)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>plt.xlim([<span class="dv">0</span>,<span class="fl">0.05</span>])</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>plt.legend([<span class="st">'Seasonality (cycles per day)'</span>,<span class="st">'Peak: '</span> <span class="op">+</span> <span class="bu">str</span>(<span class="bu">int</span>(<span class="dv">1</span><span class="op">/</span>freq[pkfreq[<span class="dv">0</span>]])) <span class="op">+</span> <span class="st">' days'</span>,<span class="st">'Biannual/Annual/SemiPeriodicity'</span>])</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>ts <span class="op">=</span> features.index</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>C:\Users\emmar\AppData\Local\Temp\ipykernel_15588\285075550.py:5: RuntimeWarning: divide by zero encountered in divide
-  t_d = 1/freq[:n_oneside]</code></pre>
-</div>
 <div class="cell-output cell-output-display">
 <div id="spectrum" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="demo_files/figure-html/spectrum-output-2.png" class="img-fluid figure-img"></p>
+<p><img src="demo_files/figure-html/spectrum-output-1.png" class="img-fluid figure-img"></p>
 <figcaption>A frequency plot showing the seasonality of temperature at the random location.</figcaption>
 </figure>
 </div>
@@ -394,42 +390,38 @@ Figure&nbsp;1: A map using a cylindrical projection and showing all stations wit
 </section>
 <section id="train-a-sarimax-model-on-weekly-temperature-before-2018.-predict-100-days-past-2017." class="level2" data-number="7">
 <h2 data-number="7" class="anchored" data-anchor-id="train-a-sarimax-model-on-weekly-temperature-before-2018.-predict-100-days-past-2017."><span class="header-section-number">7</span> Train a SARIMAX model on weekly temperature before 2018. Predict 100 days past 2017.</h2>
-<div id="cell-SARIMAX" class="cell" data-execution_count="30">
+<div id="cell-SARIMAX" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>tpred <span class="op">=</span> <span class="dv">100</span> <span class="co"># predict 100 days into the future</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>Ntrain <span class="op">=</span> <span class="bu">len</span>(tst[tst<span class="op">&lt;</span>datetime.datetime.strptime(<span class="st">'January 1, 2018'</span>,<span class="st">'%B </span><span class="sc">%d</span><span class="st">, %Y'</span>)])</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>traindata <span class="op">=</span> yt[<span class="dv">0</span>:Ntrain]</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>testdata <span class="op">=</span> yt[Ntrain:]</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>ts_pred <span class="op">=</span> [tst[<span class="op">-</span>(<span class="bu">len</span>(yt)<span class="op">-</span>Ntrain)] <span class="op">+</span> DateOffset(days<span class="op">=</span>i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>((tpred<span class="op">+</span><span class="bu">len</span>(yt)<span class="op">-</span>Ntrain)<span class="op">*</span>downsamp)]</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>ts_pred <span class="op">=</span> ts_pred[::downsamp]</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># use seasonal arima model</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>mod <span class="op">=</span> sm.SARIMAX(traindata, order<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), seasonal_order <span class="op">=</span> (<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">2</span>,np.floor(<span class="dv">1</span><span class="op">/</span>freq[pkfreq[<span class="dv">0</span>]]<span class="op">/</span>downsamp)))</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>res <span class="op">=</span> mod.fit()</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> res.predict(<span class="dv">1</span>, Ntrain)</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>prediction <span class="op">=</span> res.forecast(tpred<span class="op">+</span> (<span class="bu">len</span>(yt)<span class="op">-</span>Ntrain))</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>plt.scatter(features.index, y)</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>plt.plot(ts_pred, prediction,<span class="st">'r'</span>)</span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>plt.plot(tst[:Ntrain], train, <span class="st">'r:'</span>)</span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>ax.xaxis.set_major_formatter(mdates.DateFormatter(<span class="st">'%Y-%m-</span><span class="sc">%d</span><span class="st">'</span>))</span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>fig.autofmt_xdate()</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Temperature anomaly ($^\circ$C)'</span>)</span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>plt.legend([<span class="st">'Data'</span>,<span class="st">'Prediction (unseen data)'</span>,<span class="st">'Training Results'</span>])</span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>tpred <span class="op">=</span> <span class="dv">100</span> <span class="co"># predict 100 days into the future</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>Ntrain <span class="op">=</span> <span class="dv">230</span><span class="co">#len(tst[tst&lt;datetime.datetime.strptime('January 1, 2018','%B %d, %Y')])</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>traindata <span class="op">=</span> yt[<span class="dv">0</span>:Ntrain]</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>testdata <span class="op">=</span> yt[Ntrain:]</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>ts_pred <span class="op">=</span> [tst[<span class="op">-</span>(<span class="bu">len</span>(yt)<span class="op">-</span>Ntrain)] <span class="op">+</span> DateOffset(days<span class="op">=</span>i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>((tpred<span class="op">+</span><span class="bu">len</span>(yt)<span class="op">-</span>Ntrain)<span class="op">*</span>downsamp)]</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>ts_pred <span class="op">=</span> ts_pred[::downsamp]</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># use seasonal arima model</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>mod <span class="op">=</span> sm.SARIMAX(traindata, order<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), seasonal_order <span class="op">=</span> (<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">2</span>,np.floor(<span class="dv">1</span><span class="op">/</span>freq[pkfreq[<span class="dv">0</span>]]<span class="op">/</span>downsamp)))</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>res <span class="op">=</span> mod.fit()</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> res.predict(<span class="dv">1</span>, Ntrain)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>prediction <span class="op">=</span> res.forecast(tpred<span class="op">+</span> (<span class="bu">len</span>(yt)<span class="op">-</span>Ntrain))</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>plt.scatter(features.index, y)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>plt.plot(ts_pred, prediction,<span class="st">'r'</span>)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>plt.plot(tst[:Ntrain], train, <span class="st">'r:'</span>)</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>ax.xaxis.set_major_formatter(mdates.DateFormatter(<span class="st">'%Y-%m-</span><span class="sc">%d</span><span class="st">'</span>))</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>fig.autofmt_xdate()</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Temperature anomaly ($^\circ$C)'</span>)</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>plt.legend([<span class="st">'Data'</span>,<span class="st">'Prediction (unseen data)'</span>,<span class="st">'Training Results'</span>])</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>C:\Users\emmar\Anaconda3\envs\NOAA_BigQuery\lib\site-packages\statsmodels\base\model.py:607: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
-  warnings.warn("Maximum Likelihood optimization failed to "</code></pre>
-</div>
 <div class="cell-output cell-output-display">
 <div id="sarimax" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="demo_files/figure-html/sarimax-output-2.png" class="img-fluid figure-img"></p>
+<p><img src="demo_files/figure-html/sarimax-output-1.png" class="img-fluid figure-img"></p>
 <figcaption>Temperature at a random station along with the SARIMAX predictions on training (dashed red) and unseen data (solid red). The model requires a ramp-up period of about 1 year at weekly resolution.</figcaption>
 </figure>
 </div>
